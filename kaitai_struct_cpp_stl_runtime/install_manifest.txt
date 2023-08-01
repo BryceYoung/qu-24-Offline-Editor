@@ -1,0 +1,4 @@
+/usr/local/lib/libkaitai_struct_cpp_stl_runtime.so
+/usr/local/include/kaitai/kaitaistream.h
+/usr/local/include/kaitai/kaitaistruct.h
+/usr/local/include/kaitai/exceptions.h
