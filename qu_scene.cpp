@@ -325,7 +325,7 @@ void qu_scene_t::channel_entry_t::_read() {
     m_dsnake_gain = m__io->read_u2le();
     m_unk11 = m__io->read_bytes(1);
     m_pad_20db_on_off = m__io->read_u1();
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), std::string("utf-8"));
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), "utf-8");
     m_unk12 = m__io->read_bytes(4);
     m_dcagroup_assignment = m__io->read_u2le();
     m_ducker = new ducker_t(m__io, this, m__root);
@@ -598,7 +598,7 @@ qu_scene_t::fx_rack_entry_t::fx_rack_entry_t(kaitai::kstream* p__io, qu_scene_t*
 
 void qu_scene_t::fx_rack_entry_t::_read() {
     m_unk_type = m__io->read_bytes(2);
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(20), std::string("utf-8"));
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(20), "utf-8");
     m_lfcut_rev_hpfin_delay_lfosinerect_chorus_flangetype_flanger_lfoselect_phaser_predelay_gatedverb = m__io->read_u2le();
     m_hfcut_rev_lpfin_delay_monolfosplit_chorus_stereosplit_flanger_monosplit_phaser_type_gatedverb = m__io->read_u2le();
     m_predelay_rev_fbfreq_delay_rate_chorus_speed_flanger_rate_phaser_frequency_symph_attack_gatedverb = m__io->read_u2le();
@@ -652,7 +652,7 @@ qu_scene_t::mutegroup_t::mutegroup_t(kaitai::kstream* p__io, qu_scene_t* p__pare
 }
 
 void qu_scene_t::mutegroup_t::_read() {
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), std::string("utf-8"));
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), "utf-8");
     m_unk = m__io->ensure_fixed_contents(std::string("\x00\x00\x00", 3));
 }
 
@@ -668,7 +668,7 @@ qu_scene_t::dca_t::dca_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene
 void qu_scene_t::dca_t::_read() {
     m_level = m__io->read_u2le();
     m_unk = m__io->read_bytes(2);
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), std::string("utf-8"));
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), "utf-8");
     m_unk2 = m__io->ensure_fixed_contents(std::string("\x00\x00\x00\xFF", 4));
 }
 
@@ -710,7 +710,7 @@ void qu_scene_t::qu_control_tab_t::_read() {
     for (int i = 0; i < l_controls; i++) {
         m_controls->push_back(new qu_control_control_t(m__io, this, m__root));
     }
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(8), std::string("utf-8"));
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(8), "utf-8");
     int l_unk = 5;
     m_unk = new std::vector<std::string>();
     m_unk->reserve(l_unk);
@@ -738,7 +738,7 @@ void qu_scene_t::header_t::_read() {
     m_id = m__io->read_u1();
     m_version = new version_t(m__io, this, m__root);
     m_unk1 = m__io->read_bytes(4);
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(13), std::string("utf-8"));
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(13), "utf-8");
     m_unk2 = m__io->read_bytes(19);
 }
 
