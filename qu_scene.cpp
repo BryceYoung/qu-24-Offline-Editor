@@ -108,14 +108,14 @@ void qu_scene_t::_read() {
     m_unk2 = new std::vector<std::string>();
     m_unk2->reserve(l_unk2);
     for (int i = 0; i < l_unk2; i++) {
-        m_unk2 = m__io->ensure_fixed_contents(std::string("\x00", 1));
+        m_unk2->push_back(m__io->ensure_fixed_contents(std::string("\x00", 1)));
     }
     m_usb_insert_do = m__io->read_bytes(1);
     int l_unk3 = 18;
     m_unk3 = new std::vector<std::string>();
     m_unk3->reserve(l_unk3);
     for (int i = 0; i < l_unk3; i++) {
-        m_unk3 = m__io->ensure_fixed_contents(std::string("\xFF", 1));
+        m_unk3->push_back(m__io->ensure_fixed_contents(std::string("\xFF", 1)));
     }
     int l_surface_patch = 32;
     m_surface_patch = new std::vector<uint8_t>();
@@ -127,7 +127,7 @@ void qu_scene_t::_read() {
     m_unk4 = new std::vector<std::string>();
     m_unk4->reserve(l_unk4);
     for (int i = 0; i < l_unk4; i++) {
-        m_unk4 = m__io->ensure_fixed_contents(std::string("\xFF", 1));
+        m_unk4->push_back(m__io->ensure_fixed_contents(std::string("\xFF", 1)));
     }
     m_patching_end = new section_end_t(m__io, this, m__root);
     m_sect12unk1 = m__io->read_bytes(2461);
@@ -190,7 +190,7 @@ void qu_scene_t::_read() {
     m_sect12unk6 = new std::vector<std::string>();
     m_sect12unk6->reserve(l_sect12unk6);
     for (int i = 0; i < l_sect12unk6; i++) {
-        m_sect12unk6 = m__io->ensure_fixed_contents(std::string("\x00", 1));
+        m_sect12unk6->push_back(m__io->ensure_fixed_contents(std::string("\x00", 1)));
     }
     m_sect12unk7 = m__io->read_bytes(1);
     m_sect12_end = new section_end_t(m__io, this, m__root);
@@ -715,7 +715,7 @@ void qu_scene_t::qu_control_tab_t::_read() {
     m_unk = new std::vector<std::string>();
     m_unk->reserve(l_unk);
     for (int i = 0; i < l_unk; i++) {
-        m_unk = m__io->ensure_fixed_contents(std::string("\x00", 1));
+        m_unk->push_back(m__io->ensure_fixed_contents(std::string("\x00", 1)));
     }
 }
 
