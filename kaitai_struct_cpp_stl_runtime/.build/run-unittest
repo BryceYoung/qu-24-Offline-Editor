@@ -1,0 +1,6 @@
+#!/bin/sh -ef
+
+cd "$(dirname "$0")"/..
+
+cd build/tests
+./unittest
