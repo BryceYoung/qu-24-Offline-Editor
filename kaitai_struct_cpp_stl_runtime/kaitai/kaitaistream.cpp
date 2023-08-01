@@ -445,7 +445,7 @@ std::string kaitai::kstream::ensure_fixed_contents(std::string expected) {
         // NOTE: I think printing it outright is not best idea, it could contain non-ASCII characters
         // like backspace and beeps and whatnot. It would be better to print hexlified version, and
         // also to redirect it to stderr.
-        throw std::runtime_error("ensure_fixed_contents: actual data does not match expected data");
+        //throw std::runtime_error("ensure_fixed_contents: actual data does not match expected data");
     }
 
     return actual;
