@@ -1,0 +1,794 @@
+// This is a generated file! Please edit source .ksy file and use kaitai-struct-compiler to rebuild
+
+#include "qu_scene.h"
+
+
+
+qu_scene_t::qu_scene_t(kaitai::kstream* p__io, kaitai::kstruct* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = this;
+    _read();
+}
+
+void qu_scene_t::_read() {
+    m_header = new header_t(m__io, this, m__root);
+    m_header_end = new section_end_t(m__io, this, m__root);
+    int l_inputs = 32;
+    m_inputs = new std::vector<channel_entry_t*>();
+    m_inputs->reserve(l_inputs);
+    for (int i = 0; i < l_inputs; i++) {
+        m_inputs->push_back(new channel_entry_t(m__io, this, m__root));
+    }
+    int l_stereo_inputs = 3;
+    m_stereo_inputs = new std::vector<channel_entry_t*>();
+    m_stereo_inputs->reserve(l_stereo_inputs);
+    for (int i = 0; i < l_stereo_inputs; i++) {
+        m_stereo_inputs->push_back(new channel_entry_t(m__io, this, m__root));
+    }
+    int l_fx_returns = 4;
+    m_fx_returns = new std::vector<channel_entry_t*>();
+    m_fx_returns->reserve(l_fx_returns);
+    for (int i = 0; i < l_fx_returns; i++) {
+        m_fx_returns->push_back(new channel_entry_t(m__io, this, m__root));
+    }
+    int l_mixes = 7;
+    m_mixes = new std::vector<channel_entry_t*>();
+    m_mixes->reserve(l_mixes);
+    for (int i = 0; i < l_mixes; i++) {
+        m_mixes->push_back(new channel_entry_t(m__io, this, m__root));
+    }
+    m_lr = new channel_entry_t(m__io, this, m__root);
+    int l_groups = 4;
+    m_groups = new std::vector<channel_entry_t*>();
+    m_groups->reserve(l_groups);
+    for (int i = 0; i < l_groups; i++) {
+        m_groups->push_back(new channel_entry_t(m__io, this, m__root));
+    }
+    int l_matrices = 2;
+    m_matrices = new std::vector<channel_entry_t*>();
+    m_matrices->reserve(l_matrices);
+    for (int i = 0; i < l_matrices; i++) {
+        m_matrices->push_back(new channel_entry_t(m__io, this, m__root));
+    }
+    int l_chan12 = 2;
+    m_chan12 = new std::vector<channel_entry_t*>();
+    m_chan12->reserve(l_chan12);
+    for (int i = 0; i < l_chan12; i++) {
+        m_chan12->push_back(new channel_entry_t(m__io, this, m__root));
+    }
+    int l_fx_sends = 4;
+    m_fx_sends = new std::vector<channel_entry_t*>();
+    m_fx_sends->reserve(l_fx_sends);
+    for (int i = 0; i < l_fx_sends; i++) {
+        m_fx_sends->push_back(new channel_entry_t(m__io, this, m__root));
+    }
+    m_chan3 = new channel_entry_t(m__io, this, m__root);
+    m_channel_end = new section_end_t(m__io, this, m__root);
+    int l_fx_rack = 4;
+    m_fx_rack = new std::vector<fx_rack_entry_t*>();
+    m_fx_rack->reserve(l_fx_rack);
+    for (int i = 0; i < l_fx_rack; i++) {
+        m_fx_rack->push_back(new fx_rack_entry_t(m__io, this, m__root));
+    }
+    m_fx_rack_end = new section_end_t(m__io, this, m__root);
+    int l_routing = 60;
+    m_routing = new std::vector<routing_entry_t*>();
+    m_routing->reserve(l_routing);
+    for (int i = 0; i < l_routing; i++) {
+        m_routing->push_back(new routing_entry_t(m__io, this, m__root));
+    }
+    m_routing_end = new section_end_t(m__io, this, m__root);
+    m_sect5 = m__io->read_bytes(0);
+    m_sect5_end = new section_end_t(m__io, this, m__root);
+    m_sect6 = m__io->read_bytes(4);
+    m_sect6_end = new section_end_t(m__io, this, m__root);
+    m_additive_pafl = m__io->read_u1();
+    m_sect7 = m__io->read_bytes(11);
+    m_sect7_end = new section_end_t(m__io, this, m__root);
+    m_sect8 = m__io->read_bytes(24);
+    m_sect8_end = new section_end_t(m__io, this, m__root);
+    m_siggen_type = m__io->read_u1();
+    m_sect9 = m__io->read_bytes(23);
+    m_sect9_end = new section_end_t(m__io, this, m__root);
+    int l_softkeys = 16;
+    m_softkeys = new std::vector<softkey_t*>();
+    m_softkeys->reserve(l_softkeys);
+    for (int i = 0; i < l_softkeys; i++) {
+        m_softkeys->push_back(new softkey_t(m__io, this, m__root));
+    }
+    m_softkeys_end = new section_end_t(m__io, this, m__root);
+    m_unk1 = m__io->read_bytes(45);
+    int l_usb_patch = 32;
+    m_usb_patch = new std::vector<uint8_t>();
+    m_usb_patch->reserve(l_usb_patch);
+    for (int i = 0; i < l_usb_patch; i++) {
+        m_usb_patch->push_back(m__io->read_u1());
+    }
+    int l_unk2 = 32;
+    m_unk2 = new std::vector<std::string>();
+    m_unk2->reserve(l_unk2);
+    for (int i = 0; i < l_unk2; i++) {
+        m_unk2 = m__io->ensure_fixed_contents(std::string("\x00", 1));
+    }
+    m_usb_insert_do = m__io->read_bytes(1);
+    int l_unk3 = 18;
+    m_unk3 = new std::vector<std::string>();
+    m_unk3->reserve(l_unk3);
+    for (int i = 0; i < l_unk3; i++) {
+        m_unk3 = m__io->ensure_fixed_contents(std::string("\xFF", 1));
+    }
+    int l_surface_patch = 32;
+    m_surface_patch = new std::vector<uint8_t>();
+    m_surface_patch->reserve(l_surface_patch);
+    for (int i = 0; i < l_surface_patch; i++) {
+        m_surface_patch->push_back(m__io->read_u1());
+    }
+    int l_unk4 = 8;
+    m_unk4 = new std::vector<std::string>();
+    m_unk4->reserve(l_unk4);
+    for (int i = 0; i < l_unk4; i++) {
+        m_unk4 = m__io->ensure_fixed_contents(std::string("\xFF", 1));
+    }
+    m_patching_end = new section_end_t(m__io, this, m__root);
+    m_sect12unk1 = m__io->read_bytes(2461);
+    m_midi_daw_channel = m__io->read_u1();
+    m_sect12unk2 = m__io->ensure_fixed_contents(std::string("\x01\x00", 2));
+    int l_dsnake_out_patching = 12;
+    m_dsnake_out_patching = new std::vector<uint8_t>();
+    m_dsnake_out_patching->reserve(l_dsnake_out_patching);
+    for (int i = 0; i < l_dsnake_out_patching; i++) {
+        m_dsnake_out_patching->push_back(m__io->read_u1());
+    }
+    int l_dsnake_out_expander_patching = 8;
+    m_dsnake_out_expander_patching = new std::vector<uint8_t>();
+    m_dsnake_out_expander_patching->reserve(l_dsnake_out_expander_patching);
+    for (int i = 0; i < l_dsnake_out_expander_patching; i++) {
+        m_dsnake_out_expander_patching->push_back(m__io->read_u1());
+    }
+    int l_monitor_patching = 40;
+    m_monitor_patching = new std::vector<uint8_t>();
+    m_monitor_patching->reserve(l_monitor_patching);
+    for (int i = 0; i < l_monitor_patching; i++) {
+        m_monitor_patching->push_back(m__io->read_u1());
+    }
+    m_unk5 = m__io->ensure_fixed_contents(std::string("\x00\x00\x00\x00", 4));
+    int l_dcas = 4;
+    m_dcas = new std::vector<dca_t*>();
+    m_dcas->reserve(l_dcas);
+    for (int i = 0; i < l_dcas; i++) {
+        m_dcas->push_back(new dca_t(m__io, this, m__root));
+    }
+    int l_unused_dca = 12;
+    m_unused_dca = new std::vector<dca_t*>();
+    m_unused_dca->reserve(l_unused_dca);
+    for (int i = 0; i < l_unused_dca; i++) {
+        m_unused_dca->push_back(new dca_t(m__io, this, m__root));
+    }
+    int l_mutegroups = 4;
+    m_mutegroups = new std::vector<mutegroup_t*>();
+    m_mutegroups->reserve(l_mutegroups);
+    for (int i = 0; i < l_mutegroups; i++) {
+        m_mutegroups->push_back(new mutegroup_t(m__io, this, m__root));
+    }
+    m_sect12unk3 = m__io->read_bytes(37);
+    int l_qucontroltabs = 5;
+    m_qucontroltabs = new std::vector<qu_control_tab_t*>();
+    m_qucontroltabs->reserve(l_qucontroltabs);
+    for (int i = 0; i < l_qucontroltabs; i++) {
+        m_qucontroltabs->push_back(new qu_control_tab_t(m__io, this, m__root));
+    }
+    m_sect12unk4 = m__io->read_bytes(18);
+    m_amm = new amm_t(m__io, this, m__root);
+    m_sect12unk5 = m__io->ensure_fixed_contents(std::string("\x00\x00", 2));
+    int l_footswitches = 4;
+    m_footswitches = new std::vector<uint16_t>();
+    m_footswitches->reserve(l_footswitches);
+    for (int i = 0; i < l_footswitches; i++) {
+        m_footswitches->push_back(m__io->read_u2le());
+    }
+    int l_sect12unk6 = 805;
+    m_sect12unk6 = new std::vector<std::string>();
+    m_sect12unk6->reserve(l_sect12unk6);
+    for (int i = 0; i < l_sect12unk6; i++) {
+        m_sect12unk6 = m__io->ensure_fixed_contents(std::string("\x00", 1));
+    }
+    m_sect12unk7 = m__io->read_bytes(1);
+    m_sect12_end = new section_end_t(m__io, this, m__root);
+    m_crc = m__io->read_u4le();
+}
+
+qu_scene_t::~qu_scene_t() {
+    delete m_header;
+    delete m_header_end;
+    for (std::vector<channel_entry_t*>::iterator it = m_inputs->begin(); it != m_inputs->end(); ++it) {
+        delete *it;
+    }
+    delete m_inputs;
+    for (std::vector<channel_entry_t*>::iterator it = m_stereo_inputs->begin(); it != m_stereo_inputs->end(); ++it) {
+        delete *it;
+    }
+    delete m_stereo_inputs;
+    for (std::vector<channel_entry_t*>::iterator it = m_fx_returns->begin(); it != m_fx_returns->end(); ++it) {
+        delete *it;
+    }
+    delete m_fx_returns;
+    for (std::vector<channel_entry_t*>::iterator it = m_mixes->begin(); it != m_mixes->end(); ++it) {
+        delete *it;
+    }
+    delete m_mixes;
+    delete m_lr;
+    for (std::vector<channel_entry_t*>::iterator it = m_groups->begin(); it != m_groups->end(); ++it) {
+        delete *it;
+    }
+    delete m_groups;
+    for (std::vector<channel_entry_t*>::iterator it = m_matrices->begin(); it != m_matrices->end(); ++it) {
+        delete *it;
+    }
+    delete m_matrices;
+    for (std::vector<channel_entry_t*>::iterator it = m_chan12->begin(); it != m_chan12->end(); ++it) {
+        delete *it;
+    }
+    delete m_chan12;
+    for (std::vector<channel_entry_t*>::iterator it = m_fx_sends->begin(); it != m_fx_sends->end(); ++it) {
+        delete *it;
+    }
+    delete m_fx_sends;
+    delete m_chan3;
+    delete m_channel_end;
+    for (std::vector<fx_rack_entry_t*>::iterator it = m_fx_rack->begin(); it != m_fx_rack->end(); ++it) {
+        delete *it;
+    }
+    delete m_fx_rack;
+    delete m_fx_rack_end;
+    for (std::vector<routing_entry_t*>::iterator it = m_routing->begin(); it != m_routing->end(); ++it) {
+        delete *it;
+    }
+    delete m_routing;
+    delete m_routing_end;
+    delete m_sect5_end;
+    delete m_sect6_end;
+    delete m_sect7_end;
+    delete m_sect8_end;
+    delete m_sect9_end;
+    for (std::vector<softkey_t*>::iterator it = m_softkeys->begin(); it != m_softkeys->end(); ++it) {
+        delete *it;
+    }
+    delete m_softkeys;
+    delete m_softkeys_end;
+    delete m_usb_patch;
+    delete m_unk2;
+    delete m_unk3;
+    delete m_surface_patch;
+    delete m_unk4;
+    delete m_patching_end;
+    delete m_dsnake_out_patching;
+    delete m_dsnake_out_expander_patching;
+    delete m_monitor_patching;
+    for (std::vector<dca_t*>::iterator it = m_dcas->begin(); it != m_dcas->end(); ++it) {
+        delete *it;
+    }
+    delete m_dcas;
+    for (std::vector<dca_t*>::iterator it = m_unused_dca->begin(); it != m_unused_dca->end(); ++it) {
+        delete *it;
+    }
+    delete m_unused_dca;
+    for (std::vector<mutegroup_t*>::iterator it = m_mutegroups->begin(); it != m_mutegroups->end(); ++it) {
+        delete *it;
+    }
+    delete m_mutegroups;
+    for (std::vector<qu_control_tab_t*>::iterator it = m_qucontroltabs->begin(); it != m_qucontroltabs->end(); ++it) {
+        delete *it;
+    }
+    delete m_qucontroltabs;
+    delete m_amm;
+    delete m_footswitches;
+    delete m_sect12unk6;
+    delete m_sect12_end;
+}
+
+qu_scene_t::channel_entry_t::channel_entry_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::_read() {
+    m_peq = new peq_t(m__io, this, m__root);
+    m_unk1 = m__io->read_bytes(1);
+    m_comp = new compressor_t(m__io, this, m__root);
+    m_gate = new gate_t(m__io, this, m__root);
+    m_unk2 = m__io->read_bytes(1);
+    m_geq = new geq_t(m__io, this, m__root);
+    m_unk3 = m__io->read_bytes(8);
+    m_hpf = new hpf_t(m__io, this, m__root);
+    m_unk4 = m__io->read_bytes(1);
+    m_delay = new delay_t(m__io, this, m__root);
+    m_unk5 = m__io->read_bytes(1);
+    m_fader = m__io->read_u2le();
+    m_gain = m__io->read_u2le();
+    m_trim = m__io->read_u2le();
+    m_qu_drive_on_off = m__io->read_u1();
+    m_phantom_on_off = m__io->read_u1();
+    m_phase_flip_on_off = m__io->read_u1();
+    m_unk6 = m__io->read_bytes(1);
+    m_mute_on_off = m__io->read_u1();
+    m_fx_insert_on_off = m__io->read_u1();
+    m_unk7 = m__io->read_bytes(1);
+    m_d_snake_on_off = m__io->read_u1();
+    m_mutegroup_assignment = m__io->read_u2le();
+    m_unk8 = m__io->read_bytes(2);
+    m_linked = m__io->read_u1();
+    m_unk9 = m__io->read_bytes(3);
+    m_preamp_linked = m__io->read_u1();
+    m_dynamicssidechain_pan_fader_mute_linked = m__io->read_u1();
+    m_unk10 = m__io->read_bytes(2);
+    m_dsnake_gain = m__io->read_u2le();
+    m_unk11 = m__io->read_bytes(1);
+    m_pad_20db_on_off = m__io->read_u1();
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), std::string("utf-8"));
+    m_unk12 = m__io->read_bytes(4);
+    m_dcagroup_assignment = m__io->read_u2le();
+    m_ducker = new ducker_t(m__io, this, m__root);
+    m_dsnake_input_number = m__io->read_u1();
+    m_unk13 = m__io->read_bytes(8);
+}
+
+qu_scene_t::channel_entry_t::~channel_entry_t() {
+    delete m_peq;
+    delete m_comp;
+    delete m_gate;
+    delete m_geq;
+    delete m_hpf;
+    delete m_delay;
+    delete m_ducker;
+}
+
+qu_scene_t::channel_entry_t::delay_t::delay_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::delay_t::_read() {
+    m_time = m__io->read_u2le();
+    m_on_off = m__io->read_u1();
+}
+
+qu_scene_t::channel_entry_t::delay_t::~delay_t() {
+}
+
+qu_scene_t::channel_entry_t::gate_t::gate_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::gate_t::_read() {
+    m_attack = m__io->read_u2le();
+    m_release = m__io->read_u2le();
+    m_hold = m__io->read_u2le();
+    m_threshold = m__io->read_u2le();
+    m_depth = m__io->read_u2le();
+    m_in_out = m__io->read_u1();
+}
+
+qu_scene_t::channel_entry_t::gate_t::~gate_t() {
+}
+
+qu_scene_t::channel_entry_t::compressor_t::compressor_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::compressor_t::_read() {
+    m_attack = m__io->read_u2le();
+    m_release = m__io->read_u2le();
+    m_knee = m__io->read_u2le();
+    m_ratio = m__io->read_u2le();
+    m_threshold = m__io->read_u2le();
+    m_gain = m__io->read_u2le();
+    m_type = m__io->read_u1();
+    m_in_out = m__io->read_u1();
+}
+
+qu_scene_t::channel_entry_t::compressor_t::~compressor_t() {
+}
+
+qu_scene_t::channel_entry_t::ducker_t::ducker_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::ducker_t::_read() {
+    m_attack = m__io->read_u2le();
+    m_release = m__io->read_u2le();
+    m_hold = m__io->read_u2le();
+    m_threshold = m__io->read_u2le();
+    m_depth = m__io->read_u2le();
+    m_on_off = m__io->read_u1();
+    m_trigger_input = m__io->read_u1();
+    m_single_gang = m__io->read_u1();
+    m_unk3 = m__io->read_bytes(1);
+    m_insert = m__io->read_u1();
+}
+
+qu_scene_t::channel_entry_t::ducker_t::~ducker_t() {
+}
+
+qu_scene_t::channel_entry_t::hpf_t::hpf_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::hpf_t::_read() {
+    m_frequency = m__io->read_u2le();
+    m_in_out = m__io->read_u1();
+}
+
+qu_scene_t::channel_entry_t::hpf_t::~hpf_t() {
+}
+
+qu_scene_t::channel_entry_t::peq_setting_t::peq_setting_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t::peq_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::peq_setting_t::_read() {
+    m_gain = m__io->read_u2le();
+    m_frequency = m__io->read_u2le();
+    m_width = m__io->read_u2le();
+}
+
+qu_scene_t::channel_entry_t::peq_setting_t::~peq_setting_t() {
+}
+
+qu_scene_t::channel_entry_t::peq_t::peq_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::peq_t::_read() {
+    m_lf = new peq_setting_t(m__io, this, m__root);
+    m_lm = new peq_setting_t(m__io, this, m__root);
+    m_hm = new peq_setting_t(m__io, this, m__root);
+    m_hf = new peq_setting_t(m__io, this, m__root);
+    m_lf_shelf = m__io->read_u1();
+    m_hf_shelf = m__io->read_u1();
+    m_in_out = m__io->read_u1();
+}
+
+qu_scene_t::channel_entry_t::peq_t::~peq_t() {
+    delete m_lf;
+    delete m_lm;
+    delete m_hm;
+    delete m_hf;
+}
+
+qu_scene_t::channel_entry_t::geq_t::geq_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::channel_entry_t::geq_t::_read() {
+    m_band31 = m__io->read_u2le();
+    m_band40 = m__io->read_u2le();
+    m_band50 = m__io->read_u2le();
+    m_band63 = m__io->read_u2le();
+    m_band80 = m__io->read_u2le();
+    m_band100 = m__io->read_u2le();
+    m_band125 = m__io->read_u2le();
+    m_band160 = m__io->read_u2le();
+    m_band200 = m__io->read_u2le();
+    m_band250 = m__io->read_u2le();
+    m_band315 = m__io->read_u2le();
+    m_band400 = m__io->read_u2le();
+    m_band500 = m__io->read_u2le();
+    m_band630 = m__io->read_u2le();
+    m_band800 = m__io->read_u2le();
+    m_band1k = m__io->read_u2le();
+    m_band1k25 = m__io->read_u2le();
+    m_band1k6 = m__io->read_u2le();
+    m_band2k = m__io->read_u2le();
+    m_band2k5 = m__io->read_u2le();
+    m_band3k15 = m__io->read_u2le();
+    m_band4k = m__io->read_u2le();
+    m_band5k = m__io->read_u2le();
+    m_band6k3 = m__io->read_u2le();
+    m_band8k = m__io->read_u2le();
+    m_band10k = m__io->read_u2le();
+    m_band12k5 = m__io->read_u2le();
+    m_band16k = m__io->read_u2le();
+}
+
+qu_scene_t::channel_entry_t::geq_t::~geq_t() {
+}
+
+qu_scene_t::routing_entry_t::routing_entry_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::routing_entry_t::_read() {
+    int l_mixes = 7;
+    m_mixes = new std::vector<route_t*>();
+    m_mixes->reserve(l_mixes);
+    for (int i = 0; i < l_mixes; i++) {
+        m_mixes->push_back(new route_t(m__io, this, m__root));
+    }
+    m_lr = new route_t(m__io, this, m__root);
+    int l_groups = 4;
+    m_groups = new std::vector<route_t*>();
+    m_groups->reserve(l_groups);
+    for (int i = 0; i < l_groups; i++) {
+        m_groups->push_back(new route_t(m__io, this, m__root));
+    }
+    int l_matrices = 2;
+    m_matrices = new std::vector<route_t*>();
+    m_matrices->reserve(l_matrices);
+    for (int i = 0; i < l_matrices; i++) {
+        m_matrices->push_back(new route_t(m__io, this, m__root));
+    }
+    int l_unk = 2;
+    m_unk = new std::vector<route_t*>();
+    m_unk->reserve(l_unk);
+    for (int i = 0; i < l_unk; i++) {
+        m_unk->push_back(new route_t(m__io, this, m__root));
+    }
+    int l_fx_sends = 4;
+    m_fx_sends = new std::vector<route_t*>();
+    m_fx_sends->reserve(l_fx_sends);
+    for (int i = 0; i < l_fx_sends; i++) {
+        m_fx_sends->push_back(new route_t(m__io, this, m__root));
+    }
+}
+
+qu_scene_t::routing_entry_t::~routing_entry_t() {
+    for (std::vector<route_t*>::iterator it = m_mixes->begin(); it != m_mixes->end(); ++it) {
+        delete *it;
+    }
+    delete m_mixes;
+    delete m_lr;
+    for (std::vector<route_t*>::iterator it = m_groups->begin(); it != m_groups->end(); ++it) {
+        delete *it;
+    }
+    delete m_groups;
+    for (std::vector<route_t*>::iterator it = m_matrices->begin(); it != m_matrices->end(); ++it) {
+        delete *it;
+    }
+    delete m_matrices;
+    for (std::vector<route_t*>::iterator it = m_unk->begin(); it != m_unk->end(); ++it) {
+        delete *it;
+    }
+    delete m_unk;
+    for (std::vector<route_t*>::iterator it = m_fx_sends->begin(); it != m_fx_sends->end(); ++it) {
+        delete *it;
+    }
+    delete m_fx_sends;
+}
+
+qu_scene_t::routing_entry_t::route_t::route_t(kaitai::kstream* p__io, qu_scene_t::routing_entry_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::routing_entry_t::route_t::_read() {
+    m_gain = m__io->read_u2le();
+    m_pan = m__io->read_u2le();
+    m_pre_on_off = m__io->read_u1();
+    m_on_off = m__io->read_u1();
+    m_unused = m__io->ensure_fixed_contents(std::string("\xFF\xFF", 2));
+}
+
+qu_scene_t::routing_entry_t::route_t::~route_t() {
+}
+
+qu_scene_t::fx_rack_entry_t::fx_rack_entry_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::fx_rack_entry_t::_read() {
+    m_unk_type = m__io->read_bytes(2);
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(20), std::string("utf-8"));
+    m_lfcut_rev_hpfin_delay_lfosinerect_chorus_flangetype_flanger_lfoselect_phaser_predelay_gatedverb = m__io->read_u2le();
+    m_hfcut_rev_lpfin_delay_monolfosplit_chorus_stereosplit_flanger_monosplit_phaser_type_gatedverb = m__io->read_u2le();
+    m_predelay_rev_fbfreq_delay_rate_chorus_speed_flanger_rate_phaser_frequency_symph_attack_gatedverb = m__io->read_u2le();
+    m_decaytime_rev_fbslope_delay_thickness_adt_depth_chorus_depth_flanger_depth_symph_hold_gatedverb = m__io->read_u2le();
+    m_hfdecay_rev_scatter_delay_wire_adt_monowide_chorus_stereospread_flanger_release_gatedverb = m__io->read_u2le();
+    m_hfslope_rev_tapleft_delay_delayseparation_adt_monomultivoice_chorus_regenerate_flanger_monostereowide_gatedverb = m__io->read_u2le();
+    m_diffusion_rev_link_delay_doublequadtrack_adt_diffusion_gatedverb = m__io->read_u2le();
+    m_size_rev_tapright_delay_speed_adt_mixresonance_phaser_locut_gatedverb = m__io->read_u2le();
+    m_shapedecaydelay_rev_feedback_delay_depth_adt_panspeed_chorus_hicut_gatedverb = m__io->read_u2le();
+    m_refdetail_rev_width_delay_pandepth_chorus = m__io->read_u2le();
+    m_echo1 = m__io->read_u2le();
+    m_echo1level_rev_emulationtype_flanger = m__io->read_u2le();
+    m_echo2_rev_speedmanual_flanger_resonantstages_phaser = m__io->read_u2le();
+    m_echo2level_rev_phasingstages_phaser = m__io->read_u2le();
+    m_bodydiffusion_rev_depth_phaser = m__io->read_u2le();
+    m_taildiffusion_rev_offset_phaser = m__io->read_u2le();
+    m_moddepth = m__io->read_u2le();
+    m_modspeed = m__io->read_u2le();
+    m_lfdecay = m__io->read_u2le();
+    m_lfxover = m__io->read_u2le();
+    m_colour = m__io->read_u2le();
+    m_colourfreq = m__io->read_u2le();
+    m_reflevel = m__io->read_u2le();
+    m_decaylevel = m__io->read_u2le();
+    m_patchtype = static_cast<qu_scene_t::fx_rack_entry_t::patch_t>(m__io->read_u1());
+    m_patchinput = m__io->read_u1();
+    m_unk_end = m__io->ensure_fixed_contents(std::string("\x16\x00", 2));
+}
+
+qu_scene_t::fx_rack_entry_t::~fx_rack_entry_t() {
+}
+
+qu_scene_t::section_end_t::section_end_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::section_end_t::_read() {
+    m_number = m__io->read_u1();
+    m_terminator = m__io->ensure_fixed_contents(std::string("\xA5\xA5\xA5", 3));
+}
+
+qu_scene_t::section_end_t::~section_end_t() {
+}
+
+qu_scene_t::mutegroup_t::mutegroup_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::mutegroup_t::_read() {
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), std::string("utf-8"));
+    m_unk = m__io->ensure_fixed_contents(std::string("\x00\x00\x00", 3));
+}
+
+qu_scene_t::mutegroup_t::~mutegroup_t() {
+}
+
+qu_scene_t::dca_t::dca_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::dca_t::_read() {
+    m_level = m__io->read_u2le();
+    m_unk = m__io->read_bytes(2);
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), std::string("utf-8"));
+    m_unk2 = m__io->ensure_fixed_contents(std::string("\x00\x00\x00\xFF", 4));
+}
+
+qu_scene_t::dca_t::~dca_t() {
+}
+
+qu_scene_t::amm_t::amm_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::amm_t::_read() {
+    m_lpfilter = m__io->read_u2le();
+    m_hpfilter = m__io->read_u2le();
+    m_unk = m__io->read_bytes(4);
+    int l_priorities = 32;
+    m_priorities = new std::vector<uint16_t>();
+    m_priorities->reserve(l_priorities);
+    for (int i = 0; i < l_priorities; i++) {
+        m_priorities->push_back(m__io->read_u2le());
+    }
+}
+
+qu_scene_t::amm_t::~amm_t() {
+    delete m_priorities;
+}
+
+qu_scene_t::qu_control_tab_t::qu_control_tab_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::qu_control_tab_t::_read() {
+    int l_controls = 15;
+    m_controls = new std::vector<qu_control_control_t*>();
+    m_controls->reserve(l_controls);
+    for (int i = 0; i < l_controls; i++) {
+        m_controls->push_back(new qu_control_control_t(m__io, this, m__root));
+    }
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(8), std::string("utf-8"));
+    int l_unk = 5;
+    m_unk = new std::vector<std::string>();
+    m_unk->reserve(l_unk);
+    for (int i = 0; i < l_unk; i++) {
+        m_unk = m__io->ensure_fixed_contents(std::string("\x00", 1));
+    }
+}
+
+qu_scene_t::qu_control_tab_t::~qu_control_tab_t() {
+    for (std::vector<qu_control_control_t*>::iterator it = m_controls->begin(); it != m_controls->end(); ++it) {
+        delete *it;
+    }
+    delete m_controls;
+    delete m_unk;
+}
+
+qu_scene_t::header_t::header_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::header_t::_read() {
+    m_magic = m__io->read_bytes(3);
+    m_id = m__io->read_u1();
+    m_version = new version_t(m__io, this, m__root);
+    m_unk1 = m__io->read_bytes(4);
+    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(13), std::string("utf-8"));
+    m_unk2 = m__io->read_bytes(19);
+}
+
+qu_scene_t::header_t::~header_t() {
+    delete m_version;
+}
+
+qu_scene_t::header_t::version_t::version_t(kaitai::kstream* p__io, qu_scene_t::header_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::header_t::version_t::_read() {
+    m_major = m__io->read_bits_int(7);
+    m_const_true = m__io->read_bits_int(1);
+    m__io->align_to_byte();
+    m_minor = m__io->read_u1();
+    m_revision = m__io->read_u2le();
+}
+
+qu_scene_t::header_t::version_t::~version_t() {
+}
+
+qu_scene_t::softkey_t::softkey_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::softkey_t::_read() {
+    m_function = m__io->read_u1();
+    m_target = m__io->read_u2le();
+}
+
+qu_scene_t::softkey_t::~softkey_t() {
+}
+
+qu_scene_t::qu_control_control_t::qu_control_control_t(kaitai::kstream* p__io, qu_scene_t::qu_control_tab_t* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
+    m__parent = p__parent;
+    m__root = p__root;
+    _read();
+}
+
+void qu_scene_t::qu_control_control_t::_read() {
+    m_type = m__io->read_u1();
+    m_target = m__io->read_u1();
+    m_destination = m__io->read_u1();
+    m_unk = m__io->ensure_fixed_contents(std::string("\xFF", 1));
+}
+
+qu_scene_t::qu_control_control_t::~qu_control_control_t() {
+}
