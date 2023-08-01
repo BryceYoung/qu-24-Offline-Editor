@@ -195,6 +195,9 @@ void qu_scene_t::_read() {
     m_sect12unk7 = m__io->read_bytes(1);
     m_sect12_end = new section_end_t(m__io, this, m__root);
     m_crc = m__io->read_u4le();
+    if(m_crc != makeCrc()){
+        throw std::runtime_error("WARNING CRC of input file is incorrect");
+    }
 }
 
 qu_scene_t::~qu_scene_t() {
@@ -833,9 +836,8 @@ uint32_t qu_scene_t::makeCrc(){
     file->clear();
     file->seekg(0,std::ios::beg);
     uint32_t crc = 0x0;
-    std::cout << "DEBUG" << std::endl;
     int j;
-    uint8_t array[0x651C]; 
+    uint8_t array[0x651C];
     file->readsome((char*)array,0x651C);
     for(uint i = 0xC; i<0x651C;i++){
         j = (~((uint8_t)array[i]) ^ (crc)) & 0xFF;
@@ -853,4 +855,12 @@ void qu_scene_t::qu_control_control_t::_read() {
 }
 
 qu_scene_t::qu_control_control_t::~qu_control_control_t() {
+}
+
+
+int main(){
+    std::istream* ifs = new std::ifstream("SCENE004.DAT",std::ios_base::binary);
+    kaitai::kstream* val = new kaitai::kstream(ifs);
+    qu_scene_t g = qu_scene_t(val);
+    std::cout << g.crc() << std::endl;
 }
