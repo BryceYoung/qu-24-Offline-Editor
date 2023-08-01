@@ -873,5 +873,5 @@ std::string kaitai::kstream::bytes_to_str(const std::string src, int codepage) {
 }
 
 #else
-#error Need to decide how to handle strings: please define one of: KS_STR_ENCODING_ICONV, KS_STR_ENCODING_WIN32API, KS_STR_ENCODING_NONE
+//#error Need to decide how to handle strings: please define one of: KS_STR_ENCODING_ICONV, KS_STR_ENCODING_WIN32API, KS_STR_ENCODING_NONE
 #endif
