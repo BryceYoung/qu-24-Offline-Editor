@@ -7,6 +7,7 @@
 
 #include <stdint.h>
 #include <vector>
+#include <iostream>
 
 #if KAITAI_STRUCT_VERSION < 7000L
 #error "Incompatible Kaitai Struct C++/STL API: version 0.7 or later is required"
@@ -985,6 +986,7 @@ public:
     std::vector<std::string>* sect12unk6() const { return m_sect12unk6; }
     std::string sect12unk7() const { return m_sect12unk7; }
     section_end_t* sect12_end() const { return m_sect12_end; }
+    uint32_t qu_scene_t::makeCrc();
     uint32_t crc() const { return m_crc; }
     qu_scene_t* _root() const { return m__root; }
     kaitai::kstruct* _parent() const { return m__parent; }

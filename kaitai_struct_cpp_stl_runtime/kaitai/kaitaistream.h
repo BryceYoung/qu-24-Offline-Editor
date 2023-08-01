@@ -79,6 +79,8 @@ public:
     uint64_t size();
     //@}
 
+    std::istream* getStream(){return m_io;}
+
     /** @name Integer numbers */
     //@{
 
