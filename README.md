@@ -7,7 +7,7 @@ For the Kaitai Struct Scene file: https://github.com/nightlark/qu-editor
 And for the CRC Algorithm: https://gist.github.com/nightlark/1e05f9afe5285dfcec89202c0e608104
 
 
-Feel free to make pull requests, i aim to have the following features by June 2024:
+Feel free to make pull requests, I aim to have the following features by June 2024:
 - Channel Mutes
 - Channel Faders
 - Scene creating/ Editing
