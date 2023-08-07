@@ -29,6 +29,7 @@ public:
     class softkey_t;
     class qu_control_control_t;
 
+    kaitai::kstream* Write(std::string fileName);
     qu_scene_t(kaitai::kstream* p__io, kaitai::kstruct* p__parent = 0, qu_scene_t* p__root = 0);
 
 private:
@@ -49,6 +50,8 @@ public:
         class peq_t;
         class geq_t;
 
+        bool Write(kaitai::kstream* p__io);
+
         channel_entry_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -60,7 +63,7 @@ public:
         class delay_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             delay_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -85,7 +88,7 @@ public:
         class gate_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             gate_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -118,7 +121,7 @@ public:
         class compressor_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             compressor_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -155,7 +158,7 @@ public:
         class ducker_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             ducker_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -196,7 +199,7 @@ public:
         class hpf_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             hpf_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -221,7 +224,7 @@ public:
         class peq_setting_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             peq_setting_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t::peq_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -248,7 +251,7 @@ public:
         class peq_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             peq_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -283,7 +286,7 @@ public:
         class geq_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             geq_t(kaitai::kstream* p__io, qu_scene_t::channel_entry_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -448,7 +451,7 @@ public:
 
     public:
         class route_t;
-
+        bool Write(kaitai::kstream* p__io);
         routing_entry_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -460,7 +463,7 @@ public:
         class route_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             route_t(kaitai::kstream* p__io, qu_scene_t::routing_entry_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -539,7 +542,7 @@ public:
             GATEDVERB_PANNER = 32784,
             GATEDVERB_POWER = 32800
         };
-
+        bool Write(kaitai::kstream* p__io);
         fx_rack_entry_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -618,7 +621,7 @@ public:
     class section_end_t : public kaitai::kstruct {
 
     public:
-
+        bool Write(kaitai::kstream* p__io);
         section_end_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -643,7 +646,7 @@ public:
     class mutegroup_t : public kaitai::kstruct {
 
     public:
-
+        bool Write(kaitai::kstream* p__io);
         mutegroup_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -668,7 +671,7 @@ public:
     class dca_t : public kaitai::kstruct {
 
     public:
-
+        bool Write(kaitai::kstream* p__io);
         dca_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -697,7 +700,7 @@ public:
     class amm_t : public kaitai::kstruct {
 
     public:
-
+        bool Write(kaitai::kstream* p__io);
         amm_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -726,7 +729,7 @@ public:
     class qu_control_tab_t : public kaitai::kstruct {
 
     public:
-
+        bool Write(kaitai::kstream* p__io);
         qu_control_tab_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -754,7 +757,7 @@ public:
 
     public:
         class version_t;
-
+        bool Write(kaitai::kstream* p__io);
         header_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -766,7 +769,7 @@ public:
         class version_t : public kaitai::kstruct {
 
         public:
-
+            bool Write(kaitai::kstream* p__io);
             version_t(kaitai::kstream* p__io, qu_scene_t::header_t* p__parent = 0, qu_scene_t* p__root = 0);
 
         private:
@@ -816,7 +819,7 @@ public:
     class softkey_t : public kaitai::kstruct {
 
     public:
-
+        bool Write(kaitai::kstream* p__io);
         softkey_t(kaitai::kstream* p__io, qu_scene_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:
@@ -841,7 +844,7 @@ public:
     class qu_control_control_t : public kaitai::kstruct {
 
     public:
-
+        bool Write(kaitai::kstream* p__io);
         qu_control_control_t(kaitai::kstream* p__io, qu_scene_t::qu_control_tab_t* p__parent = 0, qu_scene_t* p__root = 0);
 
     private:

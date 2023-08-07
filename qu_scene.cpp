@@ -200,6 +200,11 @@ void qu_scene_t::_read() {
     }
 }
 
+kaitai::kstream* qu_scene_t::Write(std::string filename){
+    m__io->getStream()->seekg(0,std::ios::beg);
+    return m__io;
+}
+
 qu_scene_t::~qu_scene_t() {
     delete m_header;
     delete m_header_end;
