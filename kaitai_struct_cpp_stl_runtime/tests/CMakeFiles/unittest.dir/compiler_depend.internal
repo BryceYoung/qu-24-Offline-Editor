@@ -333,5 +333,9 @@ tests/CMakeFiles/unittest.dir/unittest.cpp.o
  /usr/include/gtest/gtest-typed-test.h
  /usr/include/gtest/gtest_pred_impl.h
  /home/bryce/prog/qu-24/kaitai_struct_cpp_stl_runtime/kaitai/kaitaistream.h
+ /usr/include/c++/11/fstream
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h
+ /usr/include/c++/11/bits/fstream.tcc
  /home/bryce/prog/qu-24/kaitai_struct_cpp_stl_runtime/kaitai/exceptions.h
 

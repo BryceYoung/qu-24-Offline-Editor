@@ -5,6 +5,7 @@
 #define KAITAI_STRUCT_VERSION 10000L
 
 #include <istream>
+#include <fstream>
 #include <sstream>
 #include <stdint.h>
 #include <sys/types.h>
@@ -33,6 +34,7 @@ namespace kaitai {
  */
 class kstream {
 public:
+    void begin_write(std::string filename);
     /**
      * Constructs new Kaitai Stream object, wrapping a given std::istream.
      * \param io istream object to use for this Kaitai Stream
@@ -89,6 +91,7 @@ public:
     // ------------------------------------------------------------------------
 
     int8_t read_s1();
+    void write_s1(int8_t);
 
     // ........................................................................
     // Big-endian
@@ -97,6 +100,9 @@ public:
     int16_t read_s2be();
     int32_t read_s4be();
     int64_t read_s8be();
+    void write_s2be(int16_t);
+    void write_s4be(int32_t);
+    void write_s8be(int64_t);
 
     // ........................................................................
     // Little-endian
@@ -105,12 +111,16 @@ public:
     int16_t read_s2le();
     int32_t read_s4le();
     int64_t read_s8le();
+    void write_s2le(int16_t);
+    void write_s4le(int32_t);
+    void write_s8le(int64_t);
 
     // ------------------------------------------------------------------------
     // Unsigned
     // ------------------------------------------------------------------------
 
     uint8_t read_u1();
+    void write_u1(uint8_t);
 
     // ........................................................................
     // Big-endian
@@ -119,6 +129,9 @@ public:
     uint16_t read_u2be();
     uint32_t read_u4be();
     uint64_t read_u8be();
+    void write_u2be(uint16_t);
+    void write_u4be(uint32_t);
+    void write_u8be(uint64_t);
 
     // ........................................................................
     // Little-endian
@@ -127,6 +140,9 @@ public:
     uint16_t read_u2le();
     uint32_t read_u4le();
     uint64_t read_u8le();
+    void write_u2le(uint16_t);
+    void write_u4le(uint32_t);
+    void write_u8le(uint64_t);
 
     //@}
 
@@ -139,6 +155,8 @@ public:
 
     float read_f4be();
     double read_f8be();
+    void write_f4be(float);
+    void write_f8be(double);
 
     // ........................................................................
     // Little-endian
@@ -146,6 +164,8 @@ public:
 
     float read_f4le();
     double read_f8le();
+    void write_f4le(float);
+    void write_f8le(double);
 
     //@}
 
@@ -156,6 +176,9 @@ public:
     uint64_t read_bits_int_be(int n);
     uint64_t read_bits_int(int n);
     uint64_t read_bits_int_le(int n);
+    //void write_bits_int_be(uint64_t,int);
+    //void write_bits_int(uint64_t,int);
+    //void write_bits_int_le(uint64_t,int);
 
     //@}
 
@@ -165,6 +188,9 @@ public:
     std::string read_bytes(std::streamsize len);
     std::string read_bytes_full();
     std::string read_bytes_term(char term, bool include, bool consume, bool eos_error);
+    void write_bytes(std::string,std::streamsize);
+    void write_bytes_full(std::string);
+    void write_bytes_term(std::string,char,bool,bool,bool);
     std::string ensure_fixed_contents(std::string expected);
 
     static std::string bytes_strip_right(std::string src, char pad_byte);
@@ -334,6 +360,7 @@ public:
 private:
     std::istream* m_io;
     std::istringstream m_io_str;
+    std::fstream* w_io;
     int m_bits_left;
     uint64_t m_bits;
 

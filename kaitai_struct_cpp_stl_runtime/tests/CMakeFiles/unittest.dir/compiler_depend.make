@@ -332,10 +332,20 @@ tests/CMakeFiles/unittest.dir/unittest.cpp.o: tests/unittest.cpp \
   /usr/include/gtest/gtest-typed-test.h \
   /usr/include/gtest/gtest_pred_impl.h \
   kaitai/kaitaistream.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
   kaitai/exceptions.h
 
 
 kaitai/exceptions.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
+
+/usr/include/c++/11/fstream:
 
 kaitai/kaitaistream.h:
 
@@ -536,6 +546,8 @@ kaitai/kaitaistream.h:
 /usr/include/c++/11/bits/memoryfwd.h:
 
 /usr/include/c++/11/bits/stl_function.h:
+
+/usr/include/c++/11/bits/fstream.tcc:
 
 /usr/include/asm-generic/posix_types.h:
 

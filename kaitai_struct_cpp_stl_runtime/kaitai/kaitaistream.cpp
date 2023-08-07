@@ -33,15 +33,18 @@
 #endif
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <stdexcept>
 
 kaitai::kstream::kstream(std::istream *io) {
+    std::fstream w_io;
     m_io = io;
     init();
 }
 
 kaitai::kstream::kstream(const std::string &data) : m_io_str(data) {
+    std::fstream w_io;
     m_io = &m_io_str;
     init();
 }
@@ -61,6 +64,10 @@ void kaitai::kstream::exceptions_enable() const {
         std::istream::failbit |
         std::istream::badbit
     );
+}
+
+void kaitai::kstream::begin_write(std::string filename){
+    w_io->open(filename,std::ios::binary);
 }
 
 // ========================================================================
@@ -115,6 +122,10 @@ int8_t kaitai::kstream::read_s1() {
     return t;
 }
 
+void kaitai::kstream::write_s1(int8_t t_8){
+    (*w_io) << t_8;
+}
+
 // ........................................................................
 // Big-endian
 // ........................................................................
@@ -128,6 +139,13 @@ int16_t kaitai::kstream::read_s2be() {
     return t;
 }
 
+void kaitai::kstream::write_s2be(int16_t t_16){
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+    t_16 = bswap_16(t_16);
+#endif
+    (*w_io).write((char*)&t_16,2);
+}
+
 int32_t kaitai::kstream::read_s4be() {
     int32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
@@ -137,6 +155,13 @@ int32_t kaitai::kstream::read_s4be() {
     return t;
 }
 
+void kaitai::kstream::write_s4be(int32_t t_32){
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+    t_32 = bswap_32(t_32);
+#endif
+    (*w_io).write((char*)&t_32,2);
+}
+
 int64_t kaitai::kstream::read_s8be() {
     int64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
@@ -144,6 +169,13 @@ int64_t kaitai::kstream::read_s8be() {
     t = bswap_64(t);
 #endif
     return t;
+}
+
+void kaitai::kstream::write_s8be(int64_t t_64){
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+    t_64 = bswap_64(t_64);
+#endif
+    (*w_io).write((char*)&t_64,8);
 }
 
 // ........................................................................
@@ -159,6 +191,13 @@ int16_t kaitai::kstream::read_s2le() {
     return t;
 }
 
+void kaitai::kstream::write_s2le(int16_t t_16){
+#if __BYTE_ORDER == __BIG_ENDIAN
+    t_16 = bswap_16(t_16);
+#endif
+    (*w_io).write((char*)&t_16,2);
+}
+
 int32_t kaitai::kstream::read_s4le() {
     int32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
@@ -166,6 +205,13 @@ int32_t kaitai::kstream::read_s4le() {
     t = bswap_32(t);
 #endif
     return t;
+}
+
+void kaitai::kstream::write_s4le(int32_t t_32){
+#if __BYTE_ORDER == __BIG_ENDIAN
+    t_32 = bswap_32(t_32);
+#endif
+    (*w_io).write((char*)&t_32,4);
 }
 
 int64_t kaitai::kstream::read_s8le() {
@@ -177,6 +223,13 @@ int64_t kaitai::kstream::read_s8le() {
     return t;
 }
 
+void kaitai::kstream::write_s8le(int64_t t_64){
+#if __BYTE_ORDER == __BIG_ENDIAN
+    t_64 = bswap_64(t_64);
+#endif
+    (*w_io).write((char*)&t_64,8);
+}
+
 // ------------------------------------------------------------------------
 // Unsigned
 // ------------------------------------------------------------------------
@@ -185,6 +238,10 @@ uint8_t kaitai::kstream::read_u1() {
     char t;
     m_io->get(t);
     return t;
+}
+
+void kaitai::kstream::write_u1(uint8_t u_8){
+    (*w_io) << u_8;
 }
 
 // ........................................................................
@@ -200,6 +257,13 @@ uint16_t kaitai::kstream::read_u2be() {
     return t;
 }
 
+void kaitai::kstream::write_u2be(uint16_t u_16){
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+    u_16 = bswap_16(u_16);
+#endif
+    (*w_io).write((char*)&u_16,2);
+}
+
 uint32_t kaitai::kstream::read_u4be() {
     uint32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
@@ -209,6 +273,13 @@ uint32_t kaitai::kstream::read_u4be() {
     return t;
 }
 
+void kaitai::kstream::write_u4be(uint32_t u_32){
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+    u_32 = bswap_32(u_32);
+#endif
+    (*w_io).write((char*)&u_32,4);
+}
+
 uint64_t kaitai::kstream::read_u8be() {
     uint64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
@@ -216,6 +287,13 @@ uint64_t kaitai::kstream::read_u8be() {
     t = bswap_64(t);
 #endif
     return t;
+}
+
+void kaitai::kstream::write_u8be(uint64_t u_64){
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+    u_64 = bswap_64(u_64);
+#endif
+    (*w_io).write((char*)&u_64,8);
 }
 
 // ........................................................................
@@ -231,6 +309,13 @@ uint16_t kaitai::kstream::read_u2le() {
     return t;
 }
 
+void kaitai::kstream::write_u2le(uint16_t u_16){
+#if __BYTE_ORDER == __BIG_ENDIAN
+    u_16 = bswap_16(u_16);
+#endif
+    (*w_io).write((char*)&u_16,2);
+}
+
 uint32_t kaitai::kstream::read_u4le() {
     uint32_t t;
     m_io->read(reinterpret_cast<char *>(&t), 4);
@@ -240,6 +325,13 @@ uint32_t kaitai::kstream::read_u4le() {
     return t;
 }
 
+void kaitai::kstream::write_u4le(uint32_t u_32){
+#if __BYTE_ORDER == __BIG_ENDIAN
+    u_32 = bswap_32(u_32);
+#endif
+    (*w_io).write((char*)&u_32,4);
+}
+
 uint64_t kaitai::kstream::read_u8le() {
     uint64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
@@ -247,6 +339,13 @@ uint64_t kaitai::kstream::read_u8le() {
     t = bswap_64(t);
 #endif
     return t;
+}
+
+void kaitai::kstream::write_u8le(uint64_t u_64){
+#if __BYTE_ORDER == __BIG_ENDIAN
+    u_64 = bswap_64(u_64);
+#endif
+    (*w_io).write((char*)&u_64,8);
 }
 
 // ========================================================================
@@ -266,6 +365,13 @@ float kaitai::kstream::read_f4be() {
     return reinterpret_cast<float &>(t);
 }
 
+void kaitai::kstream::write_f4be(float f){
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+    f = bswap_32(f);
+#endif
+    (*w_io).write((char*)&f,4);
+}
+
 double kaitai::kstream::read_f8be() {
     uint64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
@@ -273,6 +379,13 @@ double kaitai::kstream::read_f8be() {
     t = bswap_64(t);
 #endif
     return reinterpret_cast<double &>(t);
+}
+
+void kaitai::kstream::write_f8be(double f_2){
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+    f_2 = bswap_64(f_2);
+#endif
+    (*w_io).write((char*)&f_2,8);
 }
 
 // ........................................................................
@@ -288,6 +401,13 @@ float kaitai::kstream::read_f4le() {
     return reinterpret_cast<float &>(t);
 }
 
+void kaitai::kstream::write_f4le(float f){
+#if __BYTE_ORDER == __BIG_ENDIAN
+    f = bswap_32(f);
+#endif
+    (*w_io).write((char*)&f,4);
+}
+
 double kaitai::kstream::read_f8le() {
     uint64_t t;
     m_io->read(reinterpret_cast<char *>(&t), 8);
@@ -296,6 +416,14 @@ double kaitai::kstream::read_f8le() {
 #endif
     return reinterpret_cast<double &>(t);
 }
+
+void kaitai::kstream::write_f8le(double f_2){
+#if __BYTE_ORDER == __BIG_ENDIAN
+    f_2 = bswap_64(f_2);
+#endif
+    (*w_io).write((char*)&f_2,8);
+}
+
 
 // ========================================================================
 // Unaligned bit values
@@ -403,6 +531,19 @@ std::string kaitai::kstream::read_bytes(std::streamsize len) {
     return std::string(result.begin(), result.end());
 }
 
+void kaitai::kstream::write_bytes(std::string string, std::streamsize len) {
+
+    // NOTE: streamsize type is signed, negative values are only *supposed* to not be used.
+    // http://en.cppreference.com/w/cpp/io/streamsize
+    if (len < 0) {
+        throw std::runtime_error("write_bytes: requested a negative amount");
+    }
+
+    if (len > 0) {
+        w_io->write((char*)(string.c_str()),len);
+    }
+}
+
 std::string kaitai::kstream::read_bytes_full() {
     std::iostream::pos_type p1 = m_io->tellg();
     m_io->seekg(0, std::ios::end);
@@ -418,6 +559,20 @@ std::string kaitai::kstream::read_bytes_full() {
     m_io->read(&result[0], len);
 
     return result;
+}
+
+void kaitai::kstream::write_bytes_full(std::string string) {
+    std::iostream::pos_type p1 = w_io->tellg();
+    w_io->seekg(0, std::ios::end);
+    std::iostream::pos_type p2 = w_io->tellg();
+    size_t len = p2 - p1;
+
+    // Note: this requires a std::string to be backed with a
+    // contiguous buffer. Officially, it's a only requirement since
+    // C++11 (C++98 and C++03 didn't have this requirement), but all
+    // major implementations had contiguous buffers anyway.
+    w_io->seekg(p1);
+    w_io->write(string.c_str(),len);
 }
 
 std::string kaitai::kstream::read_bytes_term(char term, bool include, bool consume, bool eos_error) {
@@ -436,6 +591,10 @@ std::string kaitai::kstream::read_bytes_term(char term, bool include, bool consu
             m_io->unget();
     }
     return result;
+}
+
+void kaitai::kstream::write_bytes_term(std::string string, char term, bool include, bool consume, bool eos_error) {
+    *w_io << string.c_str();
 }
 
 std::string kaitai::kstream::ensure_fixed_contents(std::string expected) {
