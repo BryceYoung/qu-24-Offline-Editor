@@ -856,11 +856,3 @@ void qu_scene_t::qu_control_control_t::_read() {
 
 qu_scene_t::qu_control_control_t::~qu_control_control_t() {
 }
-
-
-int main(){
-    std::istream* ifs = new std::ifstream("SCENE004.DAT",std::ios_base::binary);
-    kaitai::kstream* val = new kaitai::kstream(ifs);
-    qu_scene_t g = qu_scene_t(val);
-    std::cout << g.crc() << std::endl;
-}

@@ -418,7 +418,9 @@ public:
         uint8_t phantom_on_off() const { return m_phantom_on_off; }
         uint8_t phase_flip_on_off() const { return m_phase_flip_on_off; }
         std::string unk6() const { return m_unk6; }
-        uint8_t mute_on_off() const { return m_mute_on_off; }
+        enum Mute {UnMuted, Muted};
+        enum Mute GetMute() const {return (enum Mute)m_mute_on_off;}
+        void SetMute(enum Mute mute){m_mute_on_off = mute;}
         uint8_t fx_insert_on_off() const { return m_fx_insert_on_off; }
         std::string unk7() const { return m_unk7; }
         uint8_t d_snake_on_off() const { return m_d_snake_on_off; }
