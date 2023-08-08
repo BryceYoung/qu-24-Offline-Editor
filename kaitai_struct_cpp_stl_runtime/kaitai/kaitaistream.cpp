@@ -67,8 +67,7 @@ void kaitai::kstream::exceptions_enable() const {
 }
 
 void kaitai::kstream::begin_write(std::string filename){
-    std::cout << "TEST???" << std::endl;
-    w_io = new std::fstream(filename, std::ios::binary | std::ios::out);
+    w_io = new std::fstream(filename, std::ios::binary | std::ios::out | std::ios::in);
     
 }
 

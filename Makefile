@@ -11,7 +11,8 @@ qu_scene.o: qu_scene.cpp
 	@g++ -g -Wall -c qu_scene.cpp -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime
 
 run: test
-	./test
+	@echo "Test"
+	@./test
 
 run_test: test
 	valgrind --leak-check=yes test

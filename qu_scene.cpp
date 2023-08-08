@@ -1276,7 +1276,6 @@ uint32_t qu_scene_t::makeCrc(kaitai::kstream* io,bool Input){
             j = (~((uint8_t)array[i]) ^ (crc)) & 0xFF;
             crc = (lut[j]) ^ 0xFF000000;
         }
-        std::cout << "CRC: " << crc << std::endl;
         return crc;
     }
     else {
@@ -1287,29 +1286,15 @@ uint32_t qu_scene_t::makeCrc(kaitai::kstream* io,bool Input){
         file2->clear();
         file2->seekg(0,std::ios::beg);
         file->seekp(0,std::ios::beg);
-        std::cout << file->get() << std::endl;
-        std::cout << file2->get() << std::endl;
-        file->seekp(0,std::ios::beg);
-        file2->seekg(0,std::ios::beg);
         uint32_t crc = 0x0;
         int j;
         uint8_t array[0x651C];
-        std::cout << file->tellp() << std::endl;
-        for(int i = 0;i<100;i++){
-            std::cout << (int)array[i] << " ";
-        }
-        std::cout << std::endl;
-        for(int i = 0;i<100;i++){
-            std::cout << file2->get() << " ";
-        }
-        std::cout << std::endl;
         file->readsome((char*)array,0x651C);
         for(uint i = 0xC; i<0x651C;i++){
             j = (~((uint8_t)array[i]) ^ (crc)) & 0xFF;
             crc = (lut[j]) ^ 0xFF000000;
         }
-        std::cout << "CRC: " << crc << std::endl;
-        file->seekg(pos);
+        file->seekp(pos);
         return crc;
     }
 }
