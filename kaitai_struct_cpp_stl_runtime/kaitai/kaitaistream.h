@@ -82,6 +82,7 @@ public:
     //@}
 
     std::istream* getStream(){return m_io;}
+    std::fstream* getFStream(){return w_io;}
 
     /** @name Integer numbers */
     //@{

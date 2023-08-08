@@ -67,7 +67,9 @@ void kaitai::kstream::exceptions_enable() const {
 }
 
 void kaitai::kstream::begin_write(std::string filename){
-    w_io->open(filename,std::ios::binary);
+    std::cout << "TEST???" << std::endl;
+    w_io = new std::fstream(filename, std::ios::binary | std::ios::out);
+    
 }
 
 // ========================================================================
@@ -123,7 +125,7 @@ int8_t kaitai::kstream::read_s1() {
 }
 
 void kaitai::kstream::write_s1(int8_t t_8){
-    (*w_io) << t_8;
+    (*w_io).write((char*)&t_8,1);
 }
 
 // ........................................................................
@@ -241,7 +243,7 @@ uint8_t kaitai::kstream::read_u1() {
 }
 
 void kaitai::kstream::write_u1(uint8_t u_8){
-    (*w_io) << u_8;
+    (*w_io).write((char*)&u_8,1);
 }
 
 // ........................................................................
@@ -277,7 +279,7 @@ void kaitai::kstream::write_u4be(uint32_t u_32){
 #if __BYTE_ORDER == __LITTLE_ENDIAN
     u_32 = bswap_32(u_32);
 #endif
-    (*w_io).write((char*)&u_32,4);
+    (*w_io).write(reinterpret_cast<char*>(&u_32),4);
 }
 
 uint64_t kaitai::kstream::read_u8be() {
@@ -293,7 +295,7 @@ void kaitai::kstream::write_u8be(uint64_t u_64){
 #if __BYTE_ORDER == __LITTLE_ENDIAN
     u_64 = bswap_64(u_64);
 #endif
-    (*w_io).write((char*)&u_64,8);
+    (*w_io).write(reinterpret_cast<char*>(&u_64),8);
 }
 
 // ........................................................................

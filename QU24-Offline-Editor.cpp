@@ -1,6 +1,13 @@
 
 #include "QU24-Offline-Editor.h"
 int main(){
+  std::istream* ifs = new std::ifstream("SCENE004.DAT",std::ios_base::binary);
+  kaitai::kstream* val = new kaitai::kstream(ifs);
+  qu_scene_t g = qu_scene_t(val);
+  //(*g.inputs())[12]->SetMute(qu_scene_t::channel_entry_t::UnMuted);
+  kaitai::kstream* ret = g.Write("FILE.DAT");
+  ret->getFStream()->close();
+  /*
     qu_scene_t* scenes[72];
     char string[] = "Scenes/SCENE004.DAT";
     int index = 0;
@@ -21,5 +28,5 @@ int main(){
         std::cout << std::endl;
         index++;
       }
-    }
+    }*/
 }
