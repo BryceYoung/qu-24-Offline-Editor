@@ -466,9 +466,42 @@ uint64_t kaitai::kstream::read_bits_int_be(int n) {
     return res;
 }
 
+void kaitai::kstream::write_bits_int_be(uint64_t res, int n) {
+    int bits_needed = n - m_bits_left;
+    m_bits_left = -bits_needed & 7; // `-bits_needed mod 8`
+
+    if (bits_needed > 0) {
+        // 1 bit  => 1 byte
+        // 8 bits => 1 byte
+        // 9 bits => 2 bytes
+        int bytes_needed = ((bits_needed - 1) / 8) + 1; // `ceil(bits_needed / 8)`
+        if (bytes_needed > 8)
+            throw std::runtime_error("read_bits_int_be: more than 8 bytes requested");
+        uint8_t buf[8];
+        m_io->read(reinterpret_cast<char *>(buf), bytes_needed);
+        for (int i = 0; i < bytes_needed; i++) {
+            res = res << 8 | buf[i];
+        }
+
+        uint64_t new_bits = res;
+        res = res >> m_bits_left | (bits_needed < 64 ? m_bits << bits_needed : 0); // avoid undefined behavior of `x << 64`
+        m_bits = new_bits; // will be masked at the end of the function
+    } else {
+        res = m_bits >> -bits_needed; // shift unneeded bits out
+    }
+
+    uint64_t mask = (static_cast<uint64_t>(1) << m_bits_left) - 1; // `m_bits_left` is in range 0..7, so `(1 << 64)` does not have to be considered
+    m_bits &= mask;
+
+}
+
 // Deprecated, use read_bits_int_be() instead.
 uint64_t kaitai::kstream::read_bits_int(int n) {
     return read_bits_int_be(n);
+}
+
+void kaitai::kstream::write_bits_int(uint64_t t_64, int n){
+    write_bits_int_be(t_64,n);
 }
 
 uint64_t kaitai::kstream::read_bits_int_le(int n) {

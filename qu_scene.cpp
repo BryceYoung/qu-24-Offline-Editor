@@ -341,6 +341,47 @@ void qu_scene_t::channel_entry_t::_read() {
     m_unk13 = m__io->read_bytes(8);
 }
 
+bool qu_scene_t::channel_entry_t::Write(kaitai::kstream* p_io) {
+    m_peq->Write(p_io);
+    p_io->write_bytes(m_unk1,1);
+    m_comp->Write(p_io);
+    m_gate->Write(p_io);
+    p_io->write_bytes(m_unk2,1);
+    m_geq->Write(p_io);
+    p_io->write_bytes(m_unk3,8);
+    m_hpf->Write(p_io);
+    p_io->write_bytes(m_unk4,1);
+    m_delay->Write(p_io);
+    p_io->write_bytes(m_unk5,1);
+    p_io->write_u2le(m_fader);
+    p_io->write_u2le(m_gain);
+    p_io->write_u2le(m_trim);
+    p_io->write_u1(m_qu_drive_on_off);
+    p_io->write_u1(m_phantom_on_off);
+    p_io->write_u1(m_phase_flip_on_off);
+    p_io->write_bytes(m_unk6,1);
+    p_io->write_u1(m_mute_on_off);
+    p_io->write_u1(m_fx_insert_on_off);
+    p_io->write_bytes(m_unk7,1);
+    p_io->write_u1(m_d_snake_on_off);
+    p_io->write_u2le(m_mutegroup_assignment);
+    p_io->write_bytes(m_unk8,2);
+    p_io->write_u1(m_linked);
+    p_io->write_bytes(m_unk9,3);
+    p_io->write_u1(m_preamp_linked);
+    p_io->write_u1(m_dynamicssidechain_pan_fader_mute_linked);
+    p_io->write_bytes(m_unk10,2);
+    p_io->write_u2le(m_dsnake_gain);
+    p_io->write_bytes(m_unk11,1);
+    p_io->write_u1(m_pad_20db_on_off);
+    p_io->write_bytes(m_name,6); // WARNING COULD BE INCORRECT
+    p_io->write_bytes(m_unk12,4);
+    p_io->write_u2le(m_dcagroup_assignment);
+    m_ducker->Write(p_io);
+    p_io->write_u1(m_dsnake_input_number);
+    p_io->write_bytes(m_unk13,8);
+}
+
 qu_scene_t::channel_entry_t::~channel_entry_t() {
     delete m_peq;
     delete m_comp;
@@ -362,6 +403,11 @@ void qu_scene_t::channel_entry_t::delay_t::_read() {
     m_on_off = m__io->read_u1();
 }
 
+bool qu_scene_t::channel_entry_t::delay_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_time);
+    p_io->write_u1(m_on_off);
+}
+
 qu_scene_t::channel_entry_t::delay_t::~delay_t() {
 }
 
@@ -378,6 +424,15 @@ void qu_scene_t::channel_entry_t::gate_t::_read() {
     m_threshold = m__io->read_u2le();
     m_depth = m__io->read_u2le();
     m_in_out = m__io->read_u1();
+}
+
+bool qu_scene_t::channel_entry_t::gate_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_attack);
+    p_io->write_u2le(m_release);
+    p_io->write_u2le(m_hold);
+    p_io->write_u2le(m_threshold);
+    p_io->write_u2le(m_depth);
+    p_io->write_u1(m_in_out);
 }
 
 qu_scene_t::channel_entry_t::gate_t::~gate_t() {
@@ -398,6 +453,16 @@ void qu_scene_t::channel_entry_t::compressor_t::_read() {
     m_gain = m__io->read_u2le();
     m_type = m__io->read_u1();
     m_in_out = m__io->read_u1();
+}
+bool qu_scene_t::channel_entry_t::compressor_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_attack);
+    p_io->write_u2le(m_release);
+    p_io->write_u2le(m_knee);
+    p_io->write_u2le(m_ratio);
+    p_io->write_u2le(m_threshold);
+    p_io->write_u2le(m_gain);
+    p_io->write_u1(m_type);
+    p_io->write_u1(m_in_out);
 }
 
 qu_scene_t::channel_entry_t::compressor_t::~compressor_t() {
@@ -422,6 +487,19 @@ void qu_scene_t::channel_entry_t::ducker_t::_read() {
     m_insert = m__io->read_u1();
 }
 
+bool qu_scene_t::channel_entry_t::ducker_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_attack);
+    p_io->write_u2le(m_release);
+    p_io->write_u2le(m_hold);
+    p_io->write_u2le(m_threshold);
+    p_io->write_u2le(m_depth);
+    p_io->write_u1(m_on_off);
+    p_io->write_u1(m_trigger_input);
+    p_io->write_u1(m_single_gang);
+    p_io->write_bytes(m_unk3,1);
+    p_io->write_u1(m_insert);
+}
+
 qu_scene_t::channel_entry_t::ducker_t::~ducker_t() {
 }
 
@@ -434,6 +512,11 @@ qu_scene_t::channel_entry_t::hpf_t::hpf_t(kaitai::kstream* p__io, qu_scene_t::ch
 void qu_scene_t::channel_entry_t::hpf_t::_read() {
     m_frequency = m__io->read_u2le();
     m_in_out = m__io->read_u1();
+}
+
+bool qu_scene_t::channel_entry_t::hpf_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_frequency);
+    p_io->write_u1(m_in_out);
 }
 
 qu_scene_t::channel_entry_t::hpf_t::~hpf_t() {
@@ -449,6 +532,11 @@ void qu_scene_t::channel_entry_t::peq_setting_t::_read() {
     m_gain = m__io->read_u2le();
     m_frequency = m__io->read_u2le();
     m_width = m__io->read_u2le();
+}
+bool qu_scene_t::channel_entry_t::peq_setting_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_gain);
+    p_io->write_u2le(m_frequency);
+    p_io->write_u2le(m_width);
 }
 
 qu_scene_t::channel_entry_t::peq_setting_t::~peq_setting_t() {
@@ -468,6 +556,16 @@ void qu_scene_t::channel_entry_t::peq_t::_read() {
     m_lf_shelf = m__io->read_u1();
     m_hf_shelf = m__io->read_u1();
     m_in_out = m__io->read_u1();
+}
+
+bool qu_scene_t::channel_entry_t::peq_t::Write(kaitai::kstream* p_io) {
+    m_lf->Write(p_io);
+    m_lm->Write(p_io);
+    m_hm->Write(p_io);
+    m_hf->Write(p_io);
+    p_io->write_u1(m_lf_shelf);
+    p_io->write_u1(m_hf_shelf);
+    p_io->write_u1(m_in_out);
 }
 
 qu_scene_t::channel_entry_t::peq_t::~peq_t() {
@@ -514,6 +612,37 @@ void qu_scene_t::channel_entry_t::geq_t::_read() {
     m_band16k = m__io->read_u2le();
 }
 
+bool qu_scene_t::channel_entry_t::geq_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_band31);
+    p_io->write_u2le(m_band40);
+    p_io->write_u2le(m_band50);
+    p_io->write_u2le(m_band63);
+    p_io->write_u2le(m_band80);
+    p_io->write_u2le(m_band100);
+    p_io->write_u2le(m_band125);
+    p_io->write_u2le(m_band160);
+    p_io->write_u2le(m_band200);
+    p_io->write_u2le(m_band250);
+    p_io->write_u2le(m_band315);
+    p_io->write_u2le(m_band400);
+    p_io->write_u2le(m_band500);
+    p_io->write_u2le(m_band630);
+    p_io->write_u2le(m_band800);
+    p_io->write_u2le(m_band1k);
+    p_io->write_u2le(m_band1k25);
+    p_io->write_u2le(m_band1k6);
+    p_io->write_u2le(m_band2k);
+    p_io->write_u2le(m_band2k5);
+    p_io->write_u2le(m_band3k15);
+    p_io->write_u2le(m_band4k);
+    p_io->write_u2le(m_band5k);
+    p_io->write_u2le(m_band6k3);
+    p_io->write_u2le(m_band8k);
+    p_io->write_u2le(m_band10k);
+    p_io->write_u2le(m_band12k5);
+    p_io->write_u2le(m_band16k);
+}
+
 qu_scene_t::channel_entry_t::geq_t::~geq_t() {
 }
 
@@ -557,6 +686,30 @@ void qu_scene_t::routing_entry_t::_read() {
     }
 }
 
+bool qu_scene_t::routing_entry_t::Write(kaitai::kstream* p_io) {
+    int l_mixes = 7;
+    for (int i = 0; i < l_mixes; i++) {
+        (*m_mixes)[i]->Write(p_io);
+    }
+    m_lr->Write(p_io);
+    int l_groups = 4;
+    for (int i = 0; i < l_groups; i++) {
+        (*m_groups)[i]->Write(p_io);
+    }
+    int l_matrices = 2;
+    for (int i = 0; i < l_matrices; i++) {
+        (*m_matrices)[i]->Write(p_io);
+    }
+    int l_unk = 2;
+    for (int i = 0; i < l_unk; i++) {
+        (*m_unk)[i]->Write(p_io);
+    }
+    int l_fx_sends = 4;
+    for (int i = 0; i < l_fx_sends; i++) {
+        (*m_fx_sends)[i]->Write(p_io);
+    }
+}
+
 qu_scene_t::routing_entry_t::~routing_entry_t() {
     for (std::vector<route_t*>::iterator it = m_mixes->begin(); it != m_mixes->end(); ++it) {
         delete *it;
@@ -593,6 +746,14 @@ void qu_scene_t::routing_entry_t::route_t::_read() {
     m_pre_on_off = m__io->read_u1();
     m_on_off = m__io->read_u1();
     m_unused = m__io->ensure_fixed_contents(std::string("\xFF\xFF", 2));
+}
+
+bool qu_scene_t::routing_entry_t::route_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_gain);
+    p_io->write_u2le(m_pan);
+    p_io->write_u1(m_pre_on_off);
+    p_io->write_u1(m_on_off);
+    p_io->write_bytes(m_unused, 2); // MAYBE SHOULD FORCE WRITE OF "\xFF\xFF"???
 }
 
 qu_scene_t::routing_entry_t::route_t::~route_t() {
@@ -636,6 +797,38 @@ void qu_scene_t::fx_rack_entry_t::_read() {
     m_unk_end = m__io->ensure_fixed_contents(std::string("\x16\x00", 2));
 }
 
+bool qu_scene_t::fx_rack_entry_t::Write(kaitai::kstream* p_io) {
+    p_io->write_bytes(m_unk_type,2);
+    p_io->write_bytes(m_name ,20); // WARNING COULD BE INCORRECT
+    p_io->write_u2le(m_lfcut_rev_hpfin_delay_lfosinerect_chorus_flangetype_flanger_lfoselect_phaser_predelay_gatedverb);
+    p_io->write_u2le(m_hfcut_rev_lpfin_delay_monolfosplit_chorus_stereosplit_flanger_monosplit_phaser_type_gatedverb);
+    p_io->write_u2le(m_predelay_rev_fbfreq_delay_rate_chorus_speed_flanger_rate_phaser_frequency_symph_attack_gatedverb);
+    p_io->write_u2le(m_decaytime_rev_fbslope_delay_thickness_adt_depth_chorus_depth_flanger_depth_symph_hold_gatedverb);
+    p_io->write_u2le(m_hfdecay_rev_scatter_delay_wire_adt_monowide_chorus_stereospread_flanger_release_gatedverb);
+    p_io->write_u2le(m_hfslope_rev_tapleft_delay_delayseparation_adt_monomultivoice_chorus_regenerate_flanger_monostereowide_gatedverb);
+    p_io->write_u2le(m_diffusion_rev_link_delay_doublequadtrack_adt_diffusion_gatedverb);
+    p_io->write_u2le(m_size_rev_tapright_delay_speed_adt_mixresonance_phaser_locut_gatedverb);
+    p_io->write_u2le(m_shapedecaydelay_rev_feedback_delay_depth_adt_panspeed_chorus_hicut_gatedverb);
+    p_io->write_u2le(m_refdetail_rev_width_delay_pandepth_chorus);
+    p_io->write_u2le(m_echo1);
+    p_io->write_u2le(m_echo1level_rev_emulationtype_flanger);
+    p_io->write_u2le(m_echo2_rev_speedmanual_flanger_resonantstages_phaser);
+    p_io->write_u2le(m_echo2level_rev_phasingstages_phaser);
+    p_io->write_u2le(m_bodydiffusion_rev_depth_phaser);
+    p_io->write_u2le(m_taildiffusion_rev_offset_phaser);
+    p_io->write_u2le(m_moddepth);
+    p_io->write_u2le(m_modspeed);
+    p_io->write_u2le(m_lfdecay);
+    p_io->write_u2le(m_lfxover);
+    p_io->write_u2le(m_colour);
+    p_io->write_u2le(m_colourfreq);
+    p_io->write_u2le(m_reflevel);
+    p_io->write_u2le(m_decaylevel);
+    p_io->write_u1(m_patchtype);
+    p_io->write_u1(m_patchinput);
+    p_io->write_bytes(m_unk_end,2); // MAYBE SHOULD FORCE "\x16\x00"???
+}
+
 qu_scene_t::fx_rack_entry_t::~fx_rack_entry_t() {
 }
 
@@ -648,6 +841,11 @@ qu_scene_t::section_end_t::section_end_t(kaitai::kstream* p__io, qu_scene_t* p__
 void qu_scene_t::section_end_t::_read() {
     m_number = m__io->read_u1();
     m_terminator = m__io->ensure_fixed_contents(std::string("\xA5\xA5\xA5", 3));
+}
+
+bool qu_scene_t::section_end_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u1(m_number);
+    p_io->write_bytes(m_terminator,3); // MAYBE SHOULD FORCE "\xA5\xA5\xA5"???
 }
 
 qu_scene_t::section_end_t::~section_end_t() {
@@ -664,6 +862,11 @@ void qu_scene_t::mutegroup_t::_read() {
     m_unk = m__io->ensure_fixed_contents(std::string("\x00\x00\x00", 3));
 }
 
+bool qu_scene_t::mutegroup_t::Write(kaitai::kstream* p_io) {
+    p_io->write_bytes(m_name,6); // WARNING COULD BE INCORRECT
+    p_io->write_bytes(m_unk,3); // MAYBE SHOULD FORCE "\x00\x00\x00"???
+}
+
 qu_scene_t::mutegroup_t::~mutegroup_t() {
 }
 
@@ -678,6 +881,13 @@ void qu_scene_t::dca_t::_read() {
     m_unk = m__io->read_bytes(2);
     m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), "utf-8");
     m_unk2 = m__io->ensure_fixed_contents(std::string("\x00\x00\x00\xFF", 4));
+}
+
+bool qu_scene_t::dca_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_level);
+    p_io->write_bytes(m_unk,2);
+    p_io->write_bytes(m_name,6); // WARNING COULD BE INCORRECT
+    p_io->write_bytes(m_unk2,4); // MAYBE SHOULD FORCE "\x00\x00\x00\xFF"???
 }
 
 qu_scene_t::dca_t::~dca_t() {
@@ -698,6 +908,16 @@ void qu_scene_t::amm_t::_read() {
     m_priorities->reserve(l_priorities);
     for (int i = 0; i < l_priorities; i++) {
         m_priorities->push_back(m__io->read_u2le());
+    }
+}
+
+bool qu_scene_t::amm_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u2le(m_lpfilter);
+    p_io->write_u2le(m_hpfilter);
+    p_io->write_bytes(m_unk,4);
+    int l_priorities = 32;
+    for (int i = 0; i < l_priorities; i++) {
+        p_io->write_u2le((*m_priorities)[i]);
     }
 }
 
@@ -727,6 +947,18 @@ void qu_scene_t::qu_control_tab_t::_read() {
     }
 }
 
+bool qu_scene_t::qu_control_tab_t::Write(kaitai::kstream* p_io) {
+    int l_controls = 15;
+    for (int i = 0; i < l_controls; i++) {
+        (*m_controls)[i]->Write(p_io);
+    }
+    p_io->write_bytes(m_name,8); // WARNING COULD BE INCCORECT
+    int l_unk = 5;
+    for (int i = 0; i < l_unk; i++) {
+        p_io->write_bytes((*m_unk)[i],1); // MAYBE SHOULD FORCE "\x00"
+    }
+}
+
 qu_scene_t::qu_control_tab_t::~qu_control_tab_t() {
     for (std::vector<qu_control_control_t*>::iterator it = m_controls->begin(); it != m_controls->end(); ++it) {
         delete *it;
@@ -750,6 +982,15 @@ void qu_scene_t::header_t::_read() {
     m_unk2 = m__io->read_bytes(19);
 }
 
+bool qu_scene_t::header_t::Write(kaitai::kstream* p_io) {
+    p_io->write_bytes(m_magic,3);
+    p_io->write_u1(m_id);
+    m_version->Write(p_io);
+    p_io->write_bytes(m_unk1,4);
+    p_io->write_bytes(m_name,13); // WARNING COULD BE INCORRECT
+    p_io->write_bytes(m_unk2,19);
+}
+
 qu_scene_t::header_t::~header_t() {
     delete m_version;
 }
@@ -768,6 +1009,14 @@ void qu_scene_t::header_t::version_t::_read() {
     m_revision = m__io->read_u2le();
 }
 
+bool qu_scene_t::header_t::version_t::Write(kaitai::kstream* p_io) {
+    p_io->write_bits_int(m_major,7);
+    p_io->write_bits_int(m_const_true,1);
+    p_io->align_to_byte();
+    p_io->write_u1(m_minor);
+    p_io->write_u2le(m_revision);
+}
+
 qu_scene_t::header_t::version_t::~version_t() {
 }
 
@@ -782,6 +1031,11 @@ void qu_scene_t::softkey_t::_read() {
     m_target = m__io->read_u2le();
 }
 
+bool qu_scene_t::softkey_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u1(m_function);
+    p_io->write_u2le(m_target);
+}
+
 qu_scene_t::softkey_t::~softkey_t() {
 }
 
@@ -789,6 +1043,23 @@ qu_scene_t::qu_control_control_t::qu_control_control_t(kaitai::kstream* p__io, q
     m__parent = p__parent;
     m__root = p__root;
     _read();
+}
+
+void qu_scene_t::qu_control_control_t::_read() {
+    m_type = m__io->read_u1();
+    m_target = m__io->read_u1();
+    m_destination = m__io->read_u1();
+    m_unk = m__io->ensure_fixed_contents(std::string("\xFF", 1));
+}
+
+bool qu_scene_t::qu_control_control_t::Write(kaitai::kstream* p_io) {
+    p_io->write_u1(m_type);
+    p_io->write_u1(m_target);
+    p_io->write_u1(m_destination);
+    p_io->write_bytes(m_unk,1); // MAYBE SHOULD FORCE "\xFF"???
+}
+
+qu_scene_t::qu_control_control_t::~qu_control_control_t() {
 }
 
 unsigned int lut[] = {
@@ -849,15 +1120,4 @@ uint32_t qu_scene_t::makeCrc(){
         crc = (lut[j]) ^ 0xFF000000;
     }
     return crc;
-}
-
-
-void qu_scene_t::qu_control_control_t::_read() {
-    m_type = m__io->read_u1();
-    m_target = m__io->read_u1();
-    m_destination = m__io->read_u1();
-    m_unk = m__io->ensure_fixed_contents(std::string("\xFF", 1));
-}
-
-qu_scene_t::qu_control_control_t::~qu_control_control_t() {
 }

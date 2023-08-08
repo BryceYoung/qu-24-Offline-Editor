@@ -176,8 +176,8 @@ public:
     uint64_t read_bits_int_be(int n);
     uint64_t read_bits_int(int n);
     uint64_t read_bits_int_le(int n);
-    //void write_bits_int_be(uint64_t,int);
-    //void write_bits_int(uint64_t,int);
+    void write_bits_int_be(uint64_t,int);
+    void write_bits_int(uint64_t,int);
     //void write_bits_int_le(uint64_t,int);
 
     //@}
