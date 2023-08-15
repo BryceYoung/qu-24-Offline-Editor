@@ -10,6 +10,11 @@ qu_scene.o: qu_scene.cpp
 	@echo "Compile qu_scene"
 	@g++ -g -Wall -c qu_scene.cpp -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime
 
+GUI: GUI.cpp GUI.css GUI.h
+	clear
+	@echo "Compile GUI"
+	@g++ GUI.cpp -o GUI `pkg-config gtkmm-3.0 --cflags --libs`
+	@./GUI
 run: test
 	@echo "Test"
 	@./test

@@ -63,6 +63,9 @@
     "stop_token": "cpp",
     "thread": "cpp",
     "valarray": "cpp",
-    "cstring": "cpp"
+    "codecvt": "cpp",
+    "cstring": "cpp",
+    "source_location": "cpp",
+    "future": "cpp"
   }
 }
