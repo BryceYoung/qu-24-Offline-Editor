@@ -1,0 +1,12 @@
+/* styletest.css */
+.Unmuted {
+  background: #00FF00;
+  color: #000000;
+  border-color: #000000;
+  /* BAD outline-color: #000000;*/
+}
+
+.Muted {
+  background: #FF0000;
+  border-color: #000000;
+}
