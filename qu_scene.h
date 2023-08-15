@@ -414,7 +414,8 @@ public:
         std::string unk4() const { return m_unk4; }
         delay_t* delay() const { return m_delay; }
         std::string unk5() const { return m_unk5; }
-        uint16_t fader() const { return m_fader; }
+        uint16_t getFader() const {return m_fader; }
+        void setFader(uint16_t i_fader) {m_fader = i_fader;}
         uint16_t gain() const { return m_gain; }
         uint16_t trim() const { return m_trim; }
         uint8_t qu_drive_on_off() const { return m_qu_drive_on_off; }
@@ -422,8 +423,8 @@ public:
         uint8_t phase_flip_on_off() const { return m_phase_flip_on_off; }
         std::string unk6() const { return m_unk6; }
         enum Mute {UnMuted, Muted};
-        enum Mute GetMute() const {return (enum Mute)m_mute_on_off;}
-        void SetMute(enum Mute mute){m_mute_on_off = mute;}
+        enum Mute getMute() const {return (enum Mute)m_mute_on_off;}
+        void setMute(enum Mute mute){m_mute_on_off = mute;}
         uint8_t fx_insert_on_off() const { return m_fx_insert_on_off; }
         std::string unk7() const { return m_unk7; }
         uint8_t d_snake_on_off() const { return m_d_snake_on_off; }

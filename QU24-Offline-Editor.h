@@ -1,13 +1,19 @@
+#ifndef QU24SHOW
+#define QU24SHOW
+
 #include "qu_scene.h"
+#include <map>
+
+typedef std::map<int, qu_scene_t*> Scenes;
 
 struct Show{
-  qu_scene_t* scenes[100];
+  Scenes scenes;
   std::string readPath;
   std::string writePath;
   std::string Showname;
 };
 
-Show show = {NULL};
+//Show show = {NULL};
 
 bool fileExists(std::string);
 
@@ -15,3 +21,5 @@ bool fileExists(std::string);
 struct Show* LoadShow(std::string);
 
 qu_scene_t* LoadScene(std::string);
+
+#endif
