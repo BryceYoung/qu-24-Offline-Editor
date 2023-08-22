@@ -8,9 +8,9 @@ And for the CRC Algorithm: https://gist.github.com/nightlark/1e05f9afe5285dfcec8
 
 
 Feel free to make pull requests, I aim to have the following features by June 2024:
-- Channel Mutes
-- Channel Faders
-- Scene creating/ Editing
+- Channel Mutes DONE
+- Channel Faders 
+- Scene creating/ Editing DONE
 - Custom Layer
 And the following features are planned, but with no current date:
 - Basic PEQ
