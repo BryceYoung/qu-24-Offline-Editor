@@ -48,7 +48,7 @@ public:
      */
     kstream(const std::string& data);
 
-    void close();
+    //void close();
 
     /** @name Stream positioning */
     //@{

@@ -1,8 +1,23 @@
 // This is a generated file! Please edit source .ksy file and use kaitai-struct-compiler to rebuild
 
 #include "qu_scene.h"
+qu_show_t::qu_show_t(kaitai::kstream* p__io, kaitai::kstruct* p__parent, qu_show_t* p__root) : kaitai::kstruct(p__io){
+    m__parent = p__parent;
+    m__root = this;
+    _read();
+}
+void qu_show_t::_read(){
+    name = m__io->read_bytes(4*9);
+}
 
-
+kaitai::kstream* qu_show_t::Write(std::string filepath){
+    kaitai::kstream* p_io = m__io;
+    p_io->begin_write(filepath + "/SHOW.DAT");
+    std::cout << name << std::endl;
+    p_io->write_bytes(name,name.length());
+    p_io->getFStream()->close();
+    return p_io;
+}
 
 qu_scene_t::qu_scene_t(kaitai::kstream* p__io, kaitai::kstruct* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
     m__parent = p__parent;
@@ -337,7 +352,7 @@ kaitai::kstream* qu_scene_t::Write(std::string filename) {
     p_io->write_bytes(m_sect12unk7,1);
     m_sect12_end->Write(p_io);
     p_io->write_u4le(makeCrc(p_io,false));
-
+    p_io->getFStream()->close();
     return p_io;
 }
 
@@ -469,7 +484,7 @@ void qu_scene_t::channel_entry_t::_read() {
     m_dsnake_gain = m__io->read_u2le();
     m_unk11 = m__io->read_bytes(1);
     m_pad_20db_on_off = m__io->read_u1();
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), "utf-8");
+    m_name = m__io->read_bytes(6); // removes bytes_to_string
     m_unk12 = m__io->read_bytes(4);
     m_dcagroup_assignment = m__io->read_u2le();
     m_ducker = new ducker_t(m__io, this, m__root);
@@ -914,7 +929,7 @@ qu_scene_t::fx_rack_entry_t::fx_rack_entry_t(kaitai::kstream* p__io, qu_scene_t*
 
 void qu_scene_t::fx_rack_entry_t::_read() {
     m_unk_type = m__io->read_bytes(2);
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(20), "utf-8");
+    m_name = m__io->read_bytes(20); // REMOVED bytes_to_str
     m_lfcut_rev_hpfin_delay_lfosinerect_chorus_flangetype_flanger_lfoselect_phaser_predelay_gatedverb = m__io->read_u2le();
     m_hfcut_rev_lpfin_delay_monolfosplit_chorus_stereosplit_flanger_monosplit_phaser_type_gatedverb = m__io->read_u2le();
     m_predelay_rev_fbfreq_delay_rate_chorus_speed_flanger_rate_phaser_frequency_symph_attack_gatedverb = m__io->read_u2le();
@@ -1007,7 +1022,7 @@ qu_scene_t::mutegroup_t::mutegroup_t(kaitai::kstream* p__io, qu_scene_t* p__pare
 }
 
 void qu_scene_t::mutegroup_t::_read() {
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), "utf-8");
+    m_name = m__io->read_bytes(6); // removed bytes_to_str
     m_unk = m__io->ensure_fixed_contents(std::string("\x00\x00\x00", 3));
 }
 
@@ -1029,7 +1044,7 @@ qu_scene_t::dca_t::dca_t(kaitai::kstream* p__io, qu_scene_t* p__parent, qu_scene
 void qu_scene_t::dca_t::_read() {
     m_level = m__io->read_u2le();
     m_unk = m__io->read_bytes(2);
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(6), "utf-8");
+    m_name = m__io->read_bytes(6); // removed bytes_to_str
     m_unk2 = m__io->ensure_fixed_contents(std::string("\x00\x00\x00\xFF", 4));
 }
 
@@ -1090,7 +1105,7 @@ void qu_scene_t::qu_control_tab_t::_read() {
     for (int i = 0; i < l_controls; i++) {
         m_controls->push_back(new qu_control_control_t(m__io, this, m__root));
     }
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(8), "utf-8");
+    m_name = m__io->read_bytes(8); // removed bytes_to_str
     int l_unk = 5;
     m_unk = new std::vector<std::string>();
     m_unk->reserve(l_unk);
@@ -1131,7 +1146,7 @@ void qu_scene_t::header_t::_read() {
     m_id = m__io->read_u1();
     m_version = new version_t(m__io, this, m__root);
     m_unk1 = m__io->read_bytes(4);
-    m_name = kaitai::kstream::bytes_to_str(m__io->read_bytes(13), "utf-8");
+    m_name = m__io->read_bytes(13); // removed bytes_to_str
     m_unk2 = m__io->read_bytes(19);
 }
 

@@ -14,6 +14,18 @@
 #error "Incompatible Kaitai Struct C++/STL API: version 0.7 or later is required"
 #endif
 
+class qu_show_t : public kaitai::kstruct{
+    public:
+        kaitai::kstream* Write(std::string);
+        qu_show_t(kaitai::kstream* p__io, kaitai::kstruct* p__parent = 0, qu_show_t* p__root = 0);
+        std::string getName() {return name;}
+    private:
+        void _read();
+        qu_show_t* m__root;
+        kaitai::kstruct* m__parent;
+        std::string name;
+};
+
 class qu_scene_t : public kaitai::kstruct {
 
 public:
@@ -811,7 +823,8 @@ public:
         uint8_t id() const { return m_id; }
         version_t* version() const { return m_version; }
         std::string unk1() const { return m_unk1; }
-        std::string name() const { return m_name; }
+        std::string getName() const {return m_name;}
+        void setName(std::string i_name) {m_name = i_name;}
         std::string unk2() const { return m_unk2; }
         qu_scene_t* _root() const { return m__root; }
         qu_scene_t* _parent() const { return m__parent; }
