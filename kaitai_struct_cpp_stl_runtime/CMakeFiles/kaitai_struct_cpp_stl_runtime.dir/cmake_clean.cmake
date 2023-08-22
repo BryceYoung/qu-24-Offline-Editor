@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/kaitai_struct_cpp_stl_runtime.dir/kaitai/kaitaistream.cpp.o"
   "CMakeFiles/kaitai_struct_cpp_stl_runtime.dir/kaitai/kaitaistream.cpp.o.d"
-  "libkaitai_struct_cpp_stl_runtime.pdb"
-  "libkaitai_struct_cpp_stl_runtime.so"
+  "out/lib/libkaitai_struct_cpp_stl_runtime.pdb"
+  "out/lib/libkaitai_struct_cpp_stl_runtime.so"
 )
 
 # Per-language clean rules from dependency scanning.

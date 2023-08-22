@@ -1,4 +1,4 @@
-#include "GUI.h"
+#include <GUI.h>
 
 //g++ myfirstprogram.cpp -o myfirstprogram `pkg-config gtkmm-3.0 --cflags --libs
 

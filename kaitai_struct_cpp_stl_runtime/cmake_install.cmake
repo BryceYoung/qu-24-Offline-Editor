@@ -49,7 +49,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libkaitai_struct_cpp_stl_runtime.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/bryce/prog/qu-24/kaitai_struct_cpp_stl_runtime/libkaitai_struct_cpp_stl_runtime.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/bryce/prog/qu-24/kaitai_struct_cpp_stl_runtime/out/lib/libkaitai_struct_cpp_stl_runtime.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libkaitai_struct_cpp_stl_runtime.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libkaitai_struct_cpp_stl_runtime.so")
     if(CMAKE_INSTALL_DO_STRIP)

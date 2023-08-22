@@ -92,7 +92,7 @@ unittest_EXTERNAL_OBJECTS =
 
 tests/unittest: tests/CMakeFiles/unittest.dir/unittest.cpp.o
 tests/unittest: tests/CMakeFiles/unittest.dir/build.make
-tests/unittest: libkaitai_struct_cpp_stl_runtime.so
+tests/unittest: out/lib/libkaitai_struct_cpp_stl_runtime.so
 tests/unittest: /usr/lib/x86_64-linux-gnu/libgtest_main.a
 tests/unittest: /usr/lib/x86_64-linux-gnu/libgtest.a
 tests/unittest: tests/CMakeFiles/unittest.dir/link.txt

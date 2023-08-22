@@ -35,6 +35,15 @@ endif()
 
 include(Common.cmake)
 
+set (OUT_DIR ${CMAKE_BINARY_DIR}/out)
+
+set_target_properties( ${PROJECT_NAME}
+    PROPERTIES    
+    ARCHIVE_OUTPUT_DIRECTORY "${OUT_DIR}/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${OUT_DIR}/lib"
+    RUNTIME_OUTPUT_DIRECTORY "${OUT_DIR}/bin"
+)
+
 install(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
