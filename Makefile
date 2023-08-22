@@ -20,6 +20,9 @@ run: test
 run_test: test
 	valgrind --leak-check=yes test
 
+windows: GUI.o QU24-Offline-Editor.o qu_scene.o
+	x86_64-w64-mingw32-g++ -o windows GUI.o QU24-Offline-Editor.o qu_scene.o -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime `pkg-config gtkmm-3.0 --cflags --libs`
+
 clean:
 	@echo "Clean"
 	@rm *.o
