@@ -13,7 +13,7 @@ qu_scene.o: src/qu_scene.cpp include/qu_scene.h
 GUI.o: src/GUI.cpp src/GUI.css include/GUI.h
 	@echo "Compile GUI"
 	@g++ -g -Wall -c src/GUI.cpp `pkg-config gtkmm-3.0 --cflags --libs`
-run: test
+run: test compile
 	@echo "Test"
 	@./test
 

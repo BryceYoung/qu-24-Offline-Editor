@@ -45,6 +45,13 @@ void MyWindow::MoveSceneUpButton(){
   std::cout << SceneFocused << std::endl;
 }
 
+void MyWindow::DeselectFaders(int dontSelect){
+  for(int i = 0;i<numFaders;i++){
+    if(i==dontSelect) continue;
+    faders[i].Deselect();
+  }
+}
+
 void GUIScene::setScene(qu_scene_t* i_scene) {
   if(i_scene==NULL) {
     scene = i_scene;
@@ -113,14 +120,21 @@ GUIScene::GUIScene(int id) : GUIScene(NULL,id){}
 GUIScene::GUIScene() : GUIScene(0){}
 
 Fader::Fader():
-  slider(), mute(){
+  slider(), mute(), select(){
+  select.get_style_context()->add_class("select");
   slider.set_range(-100,10);
   slider.set_draw_value(false);
   slider.set_inverted(true);
-  set_size_request(50,200);
+  mute.signal_pressed().connect(sigc::mem_fun(*this,&Fader::MutePressed));
+  slider.signal_adjust_bounds().connect((sigc::mem_fun(*this,&Fader::updateFader)));
+  select.signal_pressed().connect(sigc::mem_fun(*this,&Fader::SelectPressed));
+  set_row_spacing(10);
+  std::cout << "space:" << get_row_spacing() << std::endl;
+  set_size_request(30,50);
   attach(mute,2,2);
   set_row_homogeneous(true);
-  attach_next_to(slider,mute,Gtk::PositionType::POS_BOTTOM,1,8);
+  attach_next_to(select,mute,Gtk::PositionType::POS_TOP,1,1);
+  attach_next_to(slider,mute,Gtk::PositionType::POS_BOTTOM,1,6);
   }
 
 void Fader::updateFader(double value){
@@ -149,9 +163,17 @@ void Fader::update(){
   channel->setFader((slider.get_value() + 100) / 110 * 32000);
 }
 
+void Fader::SelectPressed(){
+  window->DeselectFaders(index);
+  selected = true;
+  select.get_style_context()->remove_class("select");
+  select.get_style_context()->add_class("selected");
+}
+
 Fader::~Fader(){
     slider.unparent();
     mute.unparent();
+    select.unparent();
 }
 
 MyWindow::MyWindow(Show* show): 
@@ -183,8 +205,7 @@ MyWindow::MyWindow(Show* show):
     faders[i].setChannel(current_scene->inputs()->at(i));
     faders[i].setMuted(faders[i].getChannel()->getMute());
     faders[i].setFader(((faders[i].getChannel()->getFader() / 32000.0) * 110)-100);
-    faders[i].mute.signal_pressed().connect(sigc::mem_fun(faders[i],&Fader::MutePressed));
-    faders[i].slider.signal_adjust_bounds().connect((sigc::mem_fun(faders[i],&Fader::updateFader)));
+    
     Faderbox.add(faders[i]);
   }
   Faderbox.set_valign(Gtk::Align::ALIGN_FILL);

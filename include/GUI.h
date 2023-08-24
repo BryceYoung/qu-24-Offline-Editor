@@ -33,11 +33,11 @@ class Fader : public Gtk::Grid {
   public:
     Fader();
     virtual ~Fader();
-    Gtk::VScale slider;
-    Gtk::Button mute;
     void updateFader(double);
     void setFader(double val){slider.set_value(val);}
     void MutePressed();
+    void SelectPressed();
+    void Deselect(){selected =  false; select.get_style_context()->add_class("select");select.get_style_context()->remove_class("selected");}
     void setIndex(int i){index = i;}
     int getIndex(){return index;}
     void setMuted(qu_scene_t::channel_entry_t::Mute mute_on_off){
@@ -55,6 +55,10 @@ class Fader : public Gtk::Grid {
     int index;
     qu_scene_t::channel_entry_t::Mute Muted = qu_scene_t::channel_entry_t::UnMuted;
     qu_scene_t::channel_entry_t* channel;
+    Gtk::VScale slider;
+    Gtk::Button mute;
+    Gtk::Button select;
+    bool selected = false;
 };
 
 class MyWindow : public Gtk::Window{
@@ -69,6 +73,7 @@ class MyWindow : public Gtk::Window{
     void MoveSceneUpButton();
     void MoveSceneDownButton();
     qu_scene_t* getCurrentScene(){return current_scene;}
+    void DeselectFaders(int);
   protected:
     Show* WindowShow;
     // Put all elements and components in here
