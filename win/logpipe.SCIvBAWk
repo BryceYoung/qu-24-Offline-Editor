@@ -1,0 +1,5 @@
+
+ERROR: Neither source directory '../qu-24' nor build directory None contain a build file meson.build.
+WARNING: Running the setup command as `meson [options]` instead of `meson setup [options]` is ambiguous and deprecated.
+[1m[31m==> ERROR:(B[m[1m A failure occurred in build().(B[m
+[1m    Aborting...(B[m

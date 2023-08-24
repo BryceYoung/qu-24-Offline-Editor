@@ -15,12 +15,11 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-meson"
              "${MINGW_PACKAGE_PREFIX}-cc")
 options=('strip' 'staticlibs')
 license=("CC BY-SA 4.0")
-source=(https://download.gnome.org/sources/${_realname}/${pkgver%.*}/${_realname}-${pkgver}.tar.xz
-        "0001-workaround-no-delayed-loading.patch")
+source=($_realname::git+https://github.com/BryceYoung/qu-24-Offline-Editor.git)
 sha256sums=('SKIP')
 
 prepare() {
-  cd "${srcdir}"/${_realname}-${pkgver}
+  cd "${srcdir}"/${_realname}
 }
 
 build() {
@@ -33,7 +32,7 @@ build() {
     --wrap-mode=nodownload \
     --default-library=both \
     --buildtype=plain \
-    "../${_realname}-${pkgver}"
+    "../${_realname}"
 
   ${MINGW_PREFIX}/bin/meson.exe compile
 }
