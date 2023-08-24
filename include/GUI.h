@@ -48,7 +48,7 @@ class Fader : public Gtk::Grid {
       else mute.get_style_context()->add_class("Unmuted"); 
       }
     qu_scene_t::channel_entry_t::Mute getMuted(){return Muted;}
-    void setChannel(qu_scene_t::channel_entry_t* chan){channel = chan;}
+    void setChannel(qu_scene_t::channel_entry_t*);
     qu_scene_t::channel_entry_t* getChannel(){return channel;}
     void update();
   protected:
@@ -79,10 +79,12 @@ class MyWindow : public Gtk::Window{
     // Put all elements and components in here
     qu_scene_t* current_scene;
     Fader* faders;
+    Fader mainFader;
     int numFaders = 24;
     Gtk::Box Faderbox;
     Gtk::Box vBox;
     Gtk::Separator topMargin;
+    Gtk::VSeparator inputSeperator;
     Gtk::ScrolledWindow scroll_window;
     Gtk::ListBox list;
     GUIScene* GUIscenes;

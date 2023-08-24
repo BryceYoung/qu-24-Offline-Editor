@@ -22,8 +22,7 @@ kaitai::kstream* qu_show_t::Write(std::string filepath){
 qu_scene_t::qu_scene_t(kaitai::kstream* p__io, kaitai::kstruct* p__parent, qu_scene_t* p__root) : kaitai::kstruct(p__io) {
     m__parent = p__parent;
     m__root = this;
-    _read();
-}
+    _read();}
 
 void qu_scene_t::_read() {
     m_header = new header_t(m__io, this, m__root);
@@ -929,7 +928,7 @@ qu_scene_t::fx_rack_entry_t::fx_rack_entry_t(kaitai::kstream* p__io, qu_scene_t*
 
 void qu_scene_t::fx_rack_entry_t::_read() {
     m_unk_type = m__io->read_bytes(2);
-    m_name = m__io->read_bytes(20); // REMOVED bytes_to_str
+    m_name = m__io->read_bytes(20); // removed bytes_to_str
     m_lfcut_rev_hpfin_delay_lfosinerect_chorus_flangetype_flanger_lfoselect_phaser_predelay_gatedverb = m__io->read_u2le();
     m_hfcut_rev_lpfin_delay_monolfosplit_chorus_stereosplit_flanger_monosplit_phaser_type_gatedverb = m__io->read_u2le();
     m_predelay_rev_fbfreq_delay_rate_chorus_speed_flanger_rate_phaser_frequency_symph_attack_gatedverb = m__io->read_u2le();

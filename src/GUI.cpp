@@ -31,7 +31,7 @@ void MyWindow::MoveSceneDownButton(){
   WindowShow->scenes[SceneFocused+1] = temp;
   GUIscenes[SceneFocused+1].setScene(temp);
   GUIscenes[SceneFocused+1].activate();
-  std::cout << SceneFocused << std::endl;
+  //std::cout << SceneFocused << std::endl;
 }
 
 void MyWindow::MoveSceneUpButton(){
@@ -42,7 +42,7 @@ void MyWindow::MoveSceneUpButton(){
   WindowShow->scenes[SceneFocused-1] = temp;
   GUIscenes[SceneFocused-1].setScene(temp);
   GUIscenes[SceneFocused-1].activate();
-  std::cout << SceneFocused << std::endl;
+  //std::cout << SceneFocused << std::endl;
 }
 
 void MyWindow::DeselectFaders(int dontSelect){
@@ -50,6 +50,7 @@ void MyWindow::DeselectFaders(int dontSelect){
     if(i==dontSelect) continue;
     faders[i].Deselect();
   }
+  mainFader.Deselect();
 }
 
 void GUIScene::setScene(qu_scene_t* i_scene) {
@@ -72,26 +73,26 @@ void GUIScene::update(qu_scene_t* i_scene){
 void GUIScene::onDrag(const Glib::RefPtr<Gdk::DragContext>&,
         Gtk::SelectionData& selection_data, guint, guint){
           selection_data.set(selection_data.get_target(),8/* 8 bits format*/,(const guchar*)"I'm Data!",9/* the length of I'm Data! in bytes*/);
-          std::cout << "DRAG" << std::endl;
+          //std::cout << "DRAG" << std::endl;
         }
 void GUIScene::onDrop(const Glib::RefPtr<Gdk::DragContext>& context, int, int,
         const Gtk::SelectionData& selection_data, guint, guint time){
   const int length = selection_data.get_length();
   if((length>=0) && (selection_data.get_format() == 8)){
-    std::cout << "Recieved: " << selection_data.get_data_as_string() << std::endl;
+    //std::cout << "Recieved: " << selection_data.get_data_as_string() << std::endl;
   }
   context->drag_finish(false,false,time);
 
 }
 
 void GUIScene::beginDrag(const Glib::RefPtr<Gdk::DragContext>& context){
-  std::cout << "DRAG BEGIN" << std::endl;
+  //std::cout << "DRAG BEGIN" << std::endl;
 }
     
 
 void GUIScene::focus(){
   SceneFocused = getID()-1;
-  std::cout << SceneFocused << std::endl;
+  //std::cout << SceneFocused << std::endl;
 }
 
 GUIScene::GUIScene(qu_scene_t* i_scene, int id): sceneName(),sceneNumber(), grid(){ 
@@ -129,13 +130,18 @@ Fader::Fader():
   slider.signal_adjust_bounds().connect((sigc::mem_fun(*this,&Fader::updateFader)));
   select.signal_pressed().connect(sigc::mem_fun(*this,&Fader::SelectPressed));
   set_row_spacing(10);
-  std::cout << "space:" << get_row_spacing() << std::endl;
   set_size_request(30,50);
   attach(mute,2,2);
   set_row_homogeneous(true);
   attach_next_to(select,mute,Gtk::PositionType::POS_TOP,1,1);
   attach_next_to(slider,mute,Gtk::PositionType::POS_BOTTOM,1,6);
-  }
+}
+
+void Fader::setChannel(qu_scene_t::channel_entry_t* chan){
+  channel = chan;
+  setMuted(channel->getMute());
+  setFader(((channel->getFader() / 32000.0) * 110)-100);
+}
 
 void Fader::updateFader(double value){
   if(value < -100) value = -100;
@@ -144,7 +150,7 @@ void Fader::updateFader(double value){
 }
 
 void Fader::MutePressed(){
-  std::cout << SceneFocused << std::endl;
+  //std::cout << SceneFocused << std::endl;
   if(Muted == qu_scene_t::channel_entry_t::UnMuted){
    mute.get_style_context()->add_class("Muted"); 
    mute.get_style_context()->remove_class("Unmuted");
@@ -155,7 +161,7 @@ void Fader::MutePressed(){
     Muted = qu_scene_t::channel_entry_t::UnMuted;
   }
   getChannel()->setMute(Muted);
-  std::cout << index << " Pressed" << ": " << Muted << std::endl;
+  //std::cout << index << " Pressed" << ": " << Muted << std::endl;
 }
 
 void Fader::update(){
@@ -179,7 +185,8 @@ Fader::~Fader(){
 MyWindow::MyWindow(Show* show): 
   Faderbox(Gtk::ORIENTATION_HORIZONTAL,10), 
   vBox(Gtk::ORIENTATION_VERTICAL,50), 
-  topMargin(), 
+  topMargin(),
+  inputSeperator(),
   scroll_window(), 
   list(), 
   nextScene("NEXT SCENE"), 
@@ -189,7 +196,8 @@ MyWindow::MyWindow(Show* show):
   sceneGrid(),
   sceneNameEntry(),
   MoveSceneUp("Move Up"),
-  MoveSceneDown("Move Down")
+  MoveSceneDown("Move Down"),
+  mainFader()
 {
   WindowShow = show;
   std::vector<Gtk::TargetEntry> entries;
@@ -199,15 +207,15 @@ MyWindow::MyWindow(Show* show):
   auto css = Gtk::CssProvider::create();
   css->load_from_path("./src/GUI.css");
   get_style_context()->add_provider_for_screen(Gdk::Screen::get_default(), css, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  mainFader.setChannel(current_scene->lr());
   faders = new Fader[numFaders];
   for(int i = 0;i<numFaders;i++){
     faders[i].setIndex(i);
-    faders[i].setChannel(current_scene->inputs()->at(i));
-    faders[i].setMuted(faders[i].getChannel()->getMute());
-    faders[i].setFader(((faders[i].getChannel()->getFader() / 32000.0) * 110)-100);
-    
+    faders[i].setChannel(current_scene->inputs()->at(i));    
     Faderbox.add(faders[i]);
   }
+  Faderbox.add(inputSeperator);
+  Faderbox.add(mainFader);
   Faderbox.set_valign(Gtk::Align::ALIGN_FILL);
   Faderbox.set_halign(Gtk::Align::ALIGN_CENTER);
   scroll_window.set_valign(Gtk::Align::ALIGN_FILL);
@@ -263,19 +271,19 @@ void MyWindow::LoadGUIScene(qu_scene_t* scene){
     current_scene = scene;
   }
   sceneNameEntry.set_text(scene->header()->getName());
-  std::cout << (int)scene->header()->id();
+  //std::cout << (int)scene->header()->id();
   for(int i = 0;i<numFaders;i++){
     faders[i].setChannel(scene->inputs()->at(i));
-    faders[i].setMuted(faders[i].getChannel()->getMute());
-    faders[i].setFader(((faders[i].getChannel()->getFader() / 32000.0) * 110)-100);
+    //std::cout << i << ": " << faders[i].getChannel()->dcagroup_assignment() << std::endl;
   }
-  
+  mainFader.setChannel(scene->lr());
 }
 void MyWindow::SaveGUIScene(){
   current_scene->header()->setName(sceneNameEntry.get_text());
   for(int i = 0;i<numFaders;i++){
     faders[i].update();
   }
+  mainFader.update();
 }
 
 int main(int argc,char* argv[]){
