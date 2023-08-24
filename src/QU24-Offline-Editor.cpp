@@ -1,4 +1,4 @@
-#include "QU24-Offline-Editor.h"
+#include "../include/QU24-Offline-Editor.h"
 #include <cstring>
 #include <unistd.h>
 #include <iostream>

@@ -2,17 +2,17 @@ compile: qu_scene.o QU24-Offline-Editor.o GUI.o
 	@echo "Compiling ALL"
 	@g++ -o test GUI.o qu_scene.o QU24-Offline-Editor.o -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime `pkg-config gtkmm-3.0 --cflags --libs`
 
-QU24-Offline-Editor.o: QU24-Offline-Editor.cpp QU24-Offline-Editor.h
+QU24-Offline-Editor.o: src/QU24-Offline-Editor.cpp include/QU24-Offline-Editor.h
 	@echo "Compile QU24-Offline-Editor"
-	@g++ -g -Wall -c QU24-Offline-Editor.cpp -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime
+	@g++ -g -Wall -c src/QU24-Offline-Editor.cpp -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime
 
-qu_scene.o: qu_scene.cpp qu_scene.h
+qu_scene.o: src/qu_scene.cpp include/qu_scene.h
 	@echo "Compile qu_scene"
-	@g++ -g -Wall -c qu_scene.cpp -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime
+	@g++ -g -Wall -c src/qu_scene.cpp -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime
 
-GUI.o: GUI.cpp GUI.css GUI.h
+GUI.o: src/GUI.cpp src/GUI.css include/GUI.h
 	@echo "Compile GUI"
-	@g++ -g -Wall -c GUI.cpp `pkg-config gtkmm-3.0 --cflags --libs`
+	@g++ -g -Wall -c src/GUI.cpp `pkg-config gtkmm-3.0 --cflags --libs`
 run: test
 	@echo "Test"
 	@./test

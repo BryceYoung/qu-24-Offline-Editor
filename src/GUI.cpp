@@ -1,4 +1,4 @@
-#include "GUI.h"
+#include "../include/GUI.h"
 
 //g++ myfirstprogram.cpp -o myfirstprogram `pkg-config gtkmm-3.0 --cflags --libs
 
@@ -175,7 +175,7 @@ MyWindow::MyWindow(Show* show):
   //entries.push_back(Gtk::TargetEntry("test/plain"));
   current_scene = Copy(show->current);
   auto css = Gtk::CssProvider::create();
-  css->load_from_path("./GUI.css");
+  css->load_from_path("./src/GUI.css");
   get_style_context()->add_provider_for_screen(Gdk::Screen::get_default(), css, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   faders = new Fader[numFaders];
   for(int i = 0;i<numFaders;i++){
