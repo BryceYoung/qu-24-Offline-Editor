@@ -183,6 +183,7 @@ Fader::~Fader(){
 }
 
 MyWindow::MyWindow(Show* show): 
+  mainFader(),
   Faderbox(Gtk::ORIENTATION_HORIZONTAL,10), 
   vBox(Gtk::ORIENTATION_VERTICAL,50), 
   topMargin(),
@@ -196,8 +197,7 @@ MyWindow::MyWindow(Show* show):
   sceneGrid(),
   sceneNameEntry(),
   MoveSceneUp("Move Up"),
-  MoveSceneDown("Move Down"),
-  mainFader()
+  MoveSceneDown("Move Down")
 {
   WindowShow = show;
   std::vector<Gtk::TargetEntry> entries;
