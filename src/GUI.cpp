@@ -52,8 +52,6 @@ void Fader::update(){
 
 void Fader::updateFader(double value){
   if(value < -100) value = -100;
-  std::cout << index << " ";
-  std::cout << value << std::endl;
 }
 
 void Fader::MutePressed(){
@@ -128,7 +126,6 @@ void GUIScene::update(qu_scene_t* i_scene){
 
 void GUIScene::focus(){
   SceneFocused = getID()-1;
-  //std::cout << SceneFocused << std::endl;
 }
 
 void GUIScene::beginDrag(const Glib::RefPtr<Gdk::DragContext>& context){
@@ -309,9 +306,6 @@ int main(int argc,char* argv[]){
   auto app = Gtk::Application::create("org.gtkmm.examples.base");
   window = new MyWindow(show);
   PrintScene(LoadScene("Scenes/NVDATA.DAT"));
-  /*for(const auto &myPar : show->scenes){
-    //std::cout << myPar.first << ": " << (int)myPar.second->inputs()->at(6)->getMute() << std::endl;
-  }*/
   window->SaveGUIScene();
   show->scenes[98] = Copy(window->getCurrentScene());
   SaveShow(show,"Temp");

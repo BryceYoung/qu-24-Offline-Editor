@@ -13,7 +13,6 @@ void qu_show_t::_read(){
 kaitai::kstream* qu_show_t::Write(std::string filepath){
     kaitai::kstream* p_io = m__io;
     p_io->begin_write(filepath + "/SHOW.DAT");
-    std::cout << name << std::endl;
     p_io->write_bytes(name,name.length());
     p_io->getFStream()->close();
     return p_io;
