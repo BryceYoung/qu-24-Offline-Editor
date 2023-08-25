@@ -33,7 +33,6 @@ struct Show* LoadShow(std::string filepath){
 }
 
 void SaveShow(Show* show,std::string filepath){
-  //std::filesystem::current_path(std::filesystem::temp_directory_path());
   std::filesystem::create_directory(filepath);
   char filename[14] = "/SCENE000.DAT";
   for(const auto &myPar : show->scenes){
