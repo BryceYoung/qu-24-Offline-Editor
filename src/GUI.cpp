@@ -7,7 +7,7 @@ static MyWindow* window;
 
 //---------------------------------------------------------  FADER  ------------------------------------------------
 Fader::Fader():
-  slider(), mute(), select()
+  mute(), slider(), select()
   {
   select.get_style_context()->add_class("select");
   slider.set_range(-100,10);
@@ -150,19 +150,19 @@ void GUIScene::onDrop(const Glib::RefPtr<Gdk::DragContext>& context, int, int,
 //-----------------------------------------------------------  MYWINDOW  ----------------------------------------------------
 
 MyWindow::MyWindow(Show* show): 
-  mainFader(),
   Faderbox(Gtk::ORIENTATION_HORIZONTAL,10), 
+  mainFader(),
+  list(), 
   vBox(Gtk::ORIENTATION_VERTICAL,50), 
   topMargin(),
   inputSeperator(),
   scroll_window(), 
-  list(), 
+  sceneGrid(),
+  sceneNameEntry(),
   nextScene("NEXT SCENE"), 
   prevScene("PREV SCENE"), 
   GoScene("GO"), 
   UpdateScene("Update"), 
-  sceneGrid(),
-  sceneNameEntry(),
   MoveSceneUp("Move Up"),
   MoveSceneDown("Move Down")
 {
@@ -196,7 +196,7 @@ MyWindow::MyWindow(Show* show):
   GUIscenes = new GUIScene[100];
   for(int i = 0;i<100;i++){
     numScenes++;
-    GUIscenes[i] = GUIScene(i+1);
+    GUIscenes[i].setID(i+1);
     /*GUIscenes[i].drag_source_set(entries,Gdk::ModifierType::MODIFIER_MASK,Gdk::ACTION_MOVE);
     GUIscenes[i].drag_dest_set(entries,Gtk::DestDefaults::DEST_DEFAULT_HIGHLIGHT,Gdk::DragAction::ACTION_MOVE);
     GUIscenes[i].signal_drag_data_get().connect(sigc::mem_fun(GUIscenes[i],&GUIScene::onDrag));
@@ -300,6 +300,16 @@ void MyWindow::DeselectFaders(int dontSelect){
   mainFader.Deselect();
 }
 
+bool DEBUG = false;
+int debugIndex = 0;
+
+void Debug(std::string string){
+  if(DEBUG){
+    std::cout << debugIndex << ": " << string << std::endl;
+    debugIndex++;
+  }
+}
+
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  MAIN  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 int main(int argc,char* argv[]){
   struct Show* show = LoadShow("AHQU/SHOWS/SHOW0008");
@@ -309,5 +319,6 @@ int main(int argc,char* argv[]){
   window->SaveGUIScene();
   show->scenes[98] = Copy(window->getCurrentScene());
   SaveShow(show,"Temp");
+  Debug("show->current->groups()->at(1)->gate(ERROR)");
   return app->run(*window,argc,argv);
 }
