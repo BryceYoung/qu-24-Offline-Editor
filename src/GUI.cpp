@@ -133,8 +133,8 @@ Fader::Fader():
   set_size_request(30,50);
   attach(mute,2,2);
   set_row_homogeneous(true);
-  attach_next_to(select,mute,Gtk::PositionType::POS_TOP,1,1);
-  attach_next_to(slider,mute,Gtk::PositionType::POS_BOTTOM,1,6);
+  attach_next_to(select,mute,Gtk::PositionType::POS_BOTTOM,1,1);
+  attach_next_to(slider,select,Gtk::PositionType::POS_BOTTOM,1,6);
 }
 
 void Fader::setChannel(qu_scene_t::channel_entry_t* chan){
