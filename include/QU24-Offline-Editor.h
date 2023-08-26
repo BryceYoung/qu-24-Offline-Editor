@@ -21,5 +21,6 @@ struct Show* LoadShow(std::string);
 qu_scene_t* LoadScene(std::string);
 void SaveShow(Show*,std::string);
 void PrintScene(qu_scene_t* scene);
+qu_scene_t* Copy(qu_scene_t* scene);
 
 #endif

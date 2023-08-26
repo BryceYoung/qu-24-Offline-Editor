@@ -13,6 +13,12 @@ qu_scene_t* LoadScene(std::string filename){
   return new qu_scene_t(stream);
 }
 
+qu_scene_t* Copy(qu_scene_t* scene){
+  if(scene == NULL) return NULL;
+  scene->Write("temp.scene");
+  return LoadScene("temp.scene");
+}
+
 struct Show* LoadShow(std::string filepath){
   std::istream* file = new std::ifstream(filepath + "/SHOW.DAT",std::ios::binary);
   kaitai::kstream* stream = new kaitai::kstream(file);
