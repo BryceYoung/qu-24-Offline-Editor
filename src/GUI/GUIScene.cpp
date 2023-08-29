@@ -1,4 +1,4 @@
-#include "../../include/GUI.h"
+#include "GUI.h"
 
 GUIScene::GUIScene(qu_scene_t* i_scene, int id): sceneName(),sceneNumber(), grid(){ 
   //Gtk::EventBox handle();
@@ -44,6 +44,7 @@ void GUIScene::update(qu_scene_t* i_scene){
 
 void GUIScene::focus(){
   SceneFocused = getID()-1;
+  std::cout << "FOCUSED" << SceneFocused << std::endl;
 }
 
 void GUIScene::beginDrag(const Glib::RefPtr<Gdk::DragContext>& context){

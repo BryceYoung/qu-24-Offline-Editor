@@ -11,7 +11,7 @@ class GUIScene : public Gtk::ListBoxRow {
     ~GUIScene();
     int getID() {return sceneID;}
     qu_scene_t* getScene() {return scene;}
-    void setID(int i_ID){sceneID = i_ID;}
+    void setID(int i_ID){sceneID = i_ID;sceneNumber.set_text(std::to_string(sceneID));std::cout << sceneID << std::endl;}
     void setScene(qu_scene_t* i_scene);
     void update(qu_scene_t* scene);
     void focus();

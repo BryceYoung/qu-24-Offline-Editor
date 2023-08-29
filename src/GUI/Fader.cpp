@@ -1,4 +1,4 @@
-#include "../../include/GUI.h"
+#include "GUI.h"
 
 Fader::Fader():
   mute(), slider(), select()
@@ -91,7 +91,7 @@ MainFader::MainFader():
 {
   remove(*widget);
   delete widget;
-  set_column_homogeneous(true);
+  //set_column_homogeneous(true);
   widget = new Gtk::Button();
   widget->get_style_context()->add_class("bselect");
   m1.get_style_context()->add_class("bselect");

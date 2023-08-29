@@ -48,12 +48,13 @@ MyWindow::MyWindow(Show* show):
   for(int i = 0;i<100;i++){
     numScenes++;
     GUIscenes[i].setID(i+1);
+    //std::cout << GUIscenes[i].getID() << ": ID" << std::endl;
     /*GUIscenes[i].drag_source_set(entries,Gdk::ModifierType::MODIFIER_MASK,Gdk::ACTION_MOVE);
     GUIscenes[i].drag_dest_set(entries,Gtk::DestDefaults::DEST_DEFAULT_HIGHLIGHT,Gdk::DragAction::ACTION_MOVE);
     GUIscenes[i].signal_drag_data_get().connect(sigc::mem_fun(GUIscenes[i],&GUIScene::onDrag));
     GUIscenes[i].signal_drag_data_received().connect(sigc::mem_fun(GUIscenes[i],&GUIScene::onDrop));
-    GUIscenes[i].signal_drag_begin().connect(sigc::mem_fun(GUIscenes[i],&GUIScene::beginDrag));
-    GUIscenes[i].signal_grab_focus().connect(sigc::mem_fun(GUIscenes[i],&GUIScene::focus));*/
+    GUIscenes[i].signal_drag_begin().connect(sigc::mem_fun(GUIscenes[i],&GUIScene::beginDrag));*/
+    GUIscenes[i].signal_grab_focus().connect(sigc::mem_fun(GUIscenes[i],&GUIScene::focus));
     list.append(GUIscenes[i]);
   }
   for(const auto &item : show->scenes){
@@ -113,6 +114,7 @@ void MyWindow::prevSceneButton(){
 }
 
 void MyWindow::GoSceneButton(){
+  std::cout << SceneFocused << std::endl;
   LoadGUIScene(Copy(GUIscenes[SceneFocused].getScene()));
 }
 

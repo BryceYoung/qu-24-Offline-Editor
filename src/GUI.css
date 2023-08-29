@@ -9,24 +9,50 @@
   border-style: hidden;
 }
 
-.bordered { border-color: #000000; border-style: solid; border-width: 1px;margin: 0px;}
+.bordered { 
+  border-color: #000000; 
+  border-style: solid; 
+  border-width: 1px;
+  margin: 0px;}
 
 .select {
   background: #006600; 
   color: #006600; 
   border-radius: 50%; 
   border-style: hidden;
+
+}
+scale contents trough highlight{
+  background-size: 30px;
+  background-color: #FFFFFF; /*colour of slider */
+  min-width: 10px;
+  border-radius: 10px;
+}
+
+scale contents trough slider{
+  min-width: 15px;
+  border-radius: 0px;
+  min-height: 30px;
+  border-style: hidden;
+  color: #555555;
+  caret-color: #555555;
+  background-image: image(rgb(100,100,100));
+}
+
+scale contents trough{
+  background-color: #FF0000; /*colour of trough*/
+
 }
 
 .selected {background: #00BB00; color:#44BB44; border-radius: 50%; border-style: hidden;}
 
 .bselect {background: #000099; 
   color: #FFFFFF; 
-  border-radius: 50%; 
+  border-radius: 100%; 
   border-style: hidden;
   text-decoration: #FFFFFF;
   text-decoration-color: #FFFFFF;
-  font-size: 10px;
+  font-size: 8px;
 }
 
 .bselected {background: #2222FF; color: #2222FF; border-radius: 50%; border-style: hidden;}

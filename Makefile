@@ -36,8 +36,11 @@ run: test compile
 	@echo "Test"
 	@./test
 
-run_test: test
+run_test: test compile
 	valgrind --leak-check=yes test
+
+run_GUI: test compile
+	GTK_DEBUG=interactive ./test
 
 clean:
 	@echo "Clean"
