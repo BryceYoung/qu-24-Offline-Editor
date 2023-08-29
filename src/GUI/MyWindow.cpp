@@ -1,4 +1,4 @@
-#include "GUI.h"
+#include "MyWindow.h"
 
 MyWindow::MyWindow(Show* show):
   Faderbox(Gtk::ORIENTATION_HORIZONTAL,10), 

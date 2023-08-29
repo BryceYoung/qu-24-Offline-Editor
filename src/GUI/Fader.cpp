@@ -1,4 +1,4 @@
-#include "GUI.h"
+#include "Fader.h"
 
 Fader::Fader():
   mute(), slider(), select()

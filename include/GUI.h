@@ -4,9 +4,9 @@
 #include "QU24-Offline-Editor.h"
 #include <iostream>
 #include <fstream>
-#include "GUI/Fader.h"
-#include "GUI/GUIScene.h"
-#include "GUI/MyWindow.h"
+#include "Fader.h"
+#include "GUIScene.h"
+#include "MyWindow.h"
 #include "Global.h"
 
 

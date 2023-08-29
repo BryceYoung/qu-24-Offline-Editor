@@ -4,6 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/include/GUI",
                 "/usr/include/gtkmm-3.0",
                 "/usr/include/glibmm-2.4",
                 "/usr/include/sigc++-2.0",

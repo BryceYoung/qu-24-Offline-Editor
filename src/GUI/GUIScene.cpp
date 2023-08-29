@@ -1,4 +1,4 @@
-#include "GUI.h"
+#include "GUIScene.h"
 
 GUIScene::GUIScene(qu_scene_t* i_scene, int id): sceneName(),sceneNumber(), grid(){ 
   //Gtk::EventBox handle();

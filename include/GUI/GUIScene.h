@@ -1,7 +1,7 @@
 #ifndef GUISCENE_H
 #define GUISCENE_H
 
-#include "../GUI.h"
+#include "GUI.h"
 
 class GUIScene : public Gtk::ListBoxRow {
   public:
