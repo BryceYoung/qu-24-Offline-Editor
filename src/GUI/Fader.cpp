@@ -1,4 +1,5 @@
 #include "Fader.h"
+#include "Global.h"
 
 Fader::Fader():
   mute(), slider(), select()
@@ -8,17 +9,17 @@ Fader::Fader():
   slider.set_range(-100,10);
   slider.set_draw_value(false);
   slider.set_inverted(true);
-  mute.signal_pressed().connect(sigc::mem_fun(*this,&Fader::MutePressed));
+  mute.signal_clicked().connect(sigc::mem_fun(*this,&Fader::MutePressed));
   slider.signal_adjust_bounds().connect((sigc::mem_fun(*this,&Fader::updateFader)));
-  select.signal_pressed().connect(sigc::mem_fun(*this,&Fader::SelectPressed));
+  select.signal_clicked().connect(sigc::mem_fun(*this,&Fader::SelectPressed));
   set_row_spacing(10);
   set_column_spacing(10);
   set_size_request(50,50);
   attach(mute,2,2,1,1);
   set_row_homogeneous(true);
-  attach_next_to(select,mute,Gtk::PositionType::POS_BOTTOM,1,1);
-  attach_next_to(*widget,select,Gtk::PositionType::POS_BOTTOM,2,1);
-  attach_next_to(slider,*widget,Gtk::PositionType::POS_BOTTOM,1,6);
+  attach_next_to(select,mute,Gtk::PositionType::BOTTOM,1,1);
+  attach_next_to(*widget,select,Gtk::PositionType::BOTTOM,2,1);
+  attach_next_to(slider,*widget,Gtk::PositionType::BOTTOM,1,6);
 }
 
 Fader::~Fader(){
@@ -101,14 +102,14 @@ MainFader::MainFader():
   m56.get_style_context()->add_class("bselect");
   m78.get_style_context()->add_class("bselect");
   m910.get_style_context()->add_class("bselect");
-  attach_next_to(*widget,select,Gtk::PositionType::POS_BOTTOM,1,1);
-  attach_next_to(m1,mute,Gtk::PositionType::POS_RIGHT,1,1);
-  attach_next_to(m2,m1,Gtk::PositionType::POS_BOTTOM,1,1);
-  attach_next_to(m3,m2,Gtk::PositionType::POS_BOTTOM,1,1);
-  attach_next_to(m4,m3,Gtk::PositionType::POS_BOTTOM,1,1);
-  attach_next_to(m56,m4,Gtk::PositionType::POS_BOTTOM,1,1);
-  attach_next_to(m78,m56,Gtk::PositionType::POS_BOTTOM,1,1);
-  attach_next_to(m910,m78,Gtk::PositionType::POS_BOTTOM,1,1);
+  attach_next_to(*widget,select,Gtk::PositionType::BOTTOM,1,1);
+  attach_next_to(m1,mute,Gtk::PositionType::RIGHT,1,1);
+  attach_next_to(m2,m1,Gtk::PositionType::BOTTOM,1,1);
+  attach_next_to(m3,m2,Gtk::PositionType::BOTTOM,1,1);
+  attach_next_to(m4,m3,Gtk::PositionType::BOTTOM,1,1);
+  attach_next_to(m56,m4,Gtk::PositionType::BOTTOM,1,1);
+  attach_next_to(m78,m56,Gtk::PositionType::BOTTOM,1,1);
+  attach_next_to(m910,m78,Gtk::PositionType::BOTTOM,1,1);
 }
 
 void MainFader::setChannel(qu_scene_t::channel_entry_t* chan){

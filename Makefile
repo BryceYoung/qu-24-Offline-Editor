@@ -2,7 +2,7 @@ INCLUDEGUI := -Iinclude -Iinclude/GUI
 
 Kaitai := -Wl,-rpath,/usr/local/lib -l kaitai_struct_cpp_stl_runtime
 
-GTKMM := `pkg-config gtkmm-3.0 --cflags --libs`
+GTKMM := `pkg-config gtkmm-4.0 --cflags --libs`
 
 compile: qu_scene.o QU24-Offline-Editor.o GUI.o Fader.o GUIScene.o MyWindow.o
 	@g++ -o test GUI.o Fader.o GUIScene.o MyWindow.o qu_scene.o QU24-Offline-Editor.o \

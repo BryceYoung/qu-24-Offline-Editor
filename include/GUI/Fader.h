@@ -1,7 +1,8 @@
 #ifndef FADER_H
 #define FADER_H
 
-#include "../GUI.h"
+#include "QU24-Offline-Editor.h"
+#include <gtkmm.h>
 
 class Fader : public Gtk::Grid {
   public:
@@ -24,7 +25,7 @@ class Fader : public Gtk::Grid {
     qu_scene_t::channel_entry_t* channel;
     qu_scene_t::channel_entry_t::Mute Muted = qu_scene_t::channel_entry_t::UnMuted;
     Gtk::Button mute;
-    Gtk::VScale slider;
+    Gtk::Scale slider;
     Gtk::Button select;
     bool selected = false;
     Gtk::Widget* widget;
@@ -43,5 +44,6 @@ class MainFader: public Fader{
     Gtk::Button m78;
     Gtk::Button m910;
 };
+
 
 #endif

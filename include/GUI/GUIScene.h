@@ -1,7 +1,8 @@
 #ifndef GUISCENE_H
 #define GUISCENE_H
 
-#include "GUI.h"
+#include <gtkmm.h>
+#include "QU24-Offline-Editor.h"
 
 class GUIScene : public Gtk::ListBoxRow {
   public:
@@ -15,9 +16,9 @@ class GUIScene : public Gtk::ListBoxRow {
     void setScene(qu_scene_t* i_scene);
     void update(qu_scene_t* scene);
     void focus();
-    void beginDrag(const Glib::RefPtr<Gdk::DragContext>& context);
-    void onDrag(const Glib::RefPtr<Gdk::DragContext>& context, Gtk::SelectionData& selection_data,guint info, guint time);
-    void onDrop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
+    //void beginDrag(const Glib::RefPtr<Gdk::DragContext>& context);
+    //void onDrag(const Glib::RefPtr<Gdk::DragContext>& context, Gtk::SelectionData& selection_data,guint info, guint time);
+    //void onDrop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
   private:
     int sceneID;
     qu_scene_t* scene;
@@ -25,5 +26,6 @@ class GUIScene : public Gtk::ListBoxRow {
     Gtk::Label sceneNumber;
     Gtk::Grid grid;
 };
+
 
 #endif

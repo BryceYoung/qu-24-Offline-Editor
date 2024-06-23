@@ -1,10 +1,14 @@
 #ifndef MYWINDOW_H
 #define MYWINDOW_H
 
-#include "GUI.h"
+#include <gtkmm.h>
+#include "QU24-Offline-Editor.h"
+#include "Fader.h"
+class GUIScene;
 
 class MyWindow : public Gtk::Window{
   public:
+    MyWindow();
     MyWindow(Show*);
     qu_scene_t* getCurrentScene(){return current_scene;}
     void LoadGUIScene(qu_scene_t* scene); // Loads a scene into the GUI
@@ -28,7 +32,7 @@ class MyWindow : public Gtk::Window{
     GUIScene* GUIscenes;
     Gtk::Box vBox;
     Gtk::Separator topMargin;
-    Gtk::VSeparator inputSeperator;
+    Gtk::Separator inputSeperator;
     Gtk::ScrolledWindow scroll_window;
     Gtk::Grid sceneGrid;
     Gtk::Entry sceneNameEntry;
@@ -39,5 +43,7 @@ class MyWindow : public Gtk::Window{
     Gtk::Button MoveSceneUp;
     Gtk::Button MoveSceneDown;
 };
+
+#include "GUIScene.h"
 
 #endif

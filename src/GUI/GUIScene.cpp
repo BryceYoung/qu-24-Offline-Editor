@@ -1,4 +1,5 @@
 #include "GUIScene.h"
+#include "Global.h"
 
 GUIScene::GUIScene(qu_scene_t* i_scene, int id): sceneName(),sceneNumber(), grid(){ 
   //Gtk::EventBox handle();
@@ -14,9 +15,9 @@ GUIScene::GUIScene(qu_scene_t* i_scene, int id): sceneName(),sceneNumber(), grid
   grid.attach(sceneNumber,1,1);
   grid.set_column_homogeneous(true);
   grid.insert_column(1);
-  grid.attach_next_to(sceneName,Gtk::PositionType::POS_RIGHT,3,1);
+  grid.attach_next_to(sceneName,Gtk::PositionType::RIGHT,3,1);
   grid.get_style_context()->add_class("bordered");
-  add(grid);
+  set_child(grid);
   
   set_size_request(50,50);
 }
@@ -46,14 +47,14 @@ void GUIScene::focus(){
   SceneFocused = getID()-1;
   std::cout << "FOCUSED" << SceneFocused << std::endl;
 }
-
+/*
 void GUIScene::beginDrag(const Glib::RefPtr<Gdk::DragContext>& context){
   //std::cout << "DRAG BEGIN" << std::endl;
 }
 
 void GUIScene::onDrag(const Glib::RefPtr<Gdk::DragContext>&,
         Gtk::SelectionData& selection_data, guint, guint){
-          selection_data.set(selection_data.get_target(),8/* 8 bits format*/,(const guchar*)"I'm Data!",9/* the length of I'm Data! in bytes*/);
+          selection_data.set(selection_data.get_target(),8// 8 bits format//,(const guchar*)"I'm Data!",9// the length of I'm Data! in bytes);
           //std::cout << "DRAG" << std::endl;
         }
 
@@ -64,4 +65,4 @@ void GUIScene::onDrop(const Glib::RefPtr<Gdk::DragContext>& context, int, int,
     std::cout << "Recieved: " << selection_data.get_data_as_string() << std::endl;
   }
   context->drag_finish(false,false,time);
-}
+}*/

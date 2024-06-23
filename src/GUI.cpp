@@ -1,5 +1,4 @@
 #include "GUI.h"
-
 //g++ myfirstprogram.cpp -o myfirstprogram `pkg-config gtkmm-3.0 --cflags --libs
 
 
@@ -18,15 +17,14 @@ void Debug(std::string string){
   }
 }
 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  MAIN  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 int main(int argc,char* argv[]){
   struct Show* show = LoadShow("AHQU/SHOWS/SHOW0008");
   auto app = Gtk::Application::create("org.gtkmm.examples.base");
-  window = new MyWindow(show);
+  //window = new MyWindow(show);
   PrintScene(LoadScene("Scenes/NVDATA.DAT"));
   window->SaveGUIScene();
   show->scenes[98] = Copy(window->getCurrentScene());
   SaveShow(show,"Temp");
   Debug("show->current->groups()->at(1)->gate(ERROR)");
-  return app->run(*window,argc,argv);
+  return app->make_window_and_run<MyWindow>(argc,argv);
 }
