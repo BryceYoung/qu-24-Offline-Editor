@@ -124,8 +124,8 @@ seq:
     # 0x59C0 - 5EB2: contained in this area is global filter and safe stuff, and seemingly individual scene filters. exact format unkonwn. maybe also individual scene filters? #nvdata
   - id: midi_daw_channel #nvdata
     type: u1
-  - id: sect12unk2
-    contents: [0x01, 0x00]
+  - id: sect12unk2 # Sometimes [0x01,0x01] or [0x01, 0x00]
+    size: 2
   - id: dsnake_out_patching
     type: u1
     repeat: expr
