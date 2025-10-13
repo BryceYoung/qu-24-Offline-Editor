@@ -4,6 +4,7 @@
 
 int SceneFocused = 0;
 MyWindow* window;
+bool debug = false;
 
 
 
@@ -18,10 +19,15 @@ void Debug(std::string string){
 }
 
 int main(int argc,char* argv[]){
+  if(argc > 1){
+    if (strcmp("debug",argv[1]) == 0){
+      debug = true;
+    }
+  }
   struct Show* show = LoadShow("AHQU/SHOWS/SHOW0008");
   auto app = Gtk::Application::create("org.gtkmm.examples.base");
   MyWindow* window;
-  int appret = app->make_window_and_run<MyWindow>(argc,argv,show,window);
+  int appret = app->make_window_and_run<MyWindow>(0,nullptr,show,window);
   PrintScene(LoadScene("Scenes/NVDATA.DAT"));
   window->SaveGUIScene();
   show->scenes[98] = Copy(window->getCurrentScene());
