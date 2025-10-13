@@ -10,6 +10,7 @@ class MyWindow : public Gtk::Window{
   public:
     MyWindow();
     MyWindow(Show*);
+    MyWindow(Show*,MyWindow*);
     qu_scene_t* getCurrentScene(){return current_scene;}
     void LoadGUIScene(qu_scene_t* scene); // Loads a scene into the GUI
     void SaveGUIScene();

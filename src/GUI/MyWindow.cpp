@@ -23,7 +23,7 @@ MyWindow::MyWindow():
   //entries.push_back(Gtk::TargetEntry("test/plain"));
   auto css = Gtk::CssProvider::create();
   css->load_from_path("./src/GUI.css");
-  //get_style_context()->add_provider_for_screen(Gdk::Screen::get_default(), css, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  get_style_context()->add_provider_for_display(Gdk::Display::get_default(), css, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   faders = new Fader[numFaders];
   for(int i = 0;i<numFaders;i++){
     faders[i].setIndex(i);
@@ -85,6 +85,10 @@ MyWindow::MyWindow(Show * show) : MyWindow(){
   for(const auto &item : show->scenes){
     GUIscenes[item.first].setScene(item.second);
   }
+}
+
+MyWindow::MyWindow(Show * show, MyWindow * window) : MyWindow(show){
+  window = this;
 }
 
 void MyWindow::LoadGUIScene(qu_scene_t* scene){

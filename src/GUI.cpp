@@ -20,11 +20,12 @@ void Debug(std::string string){
 int main(int argc,char* argv[]){
   struct Show* show = LoadShow("AHQU/SHOWS/SHOW0008");
   auto app = Gtk::Application::create("org.gtkmm.examples.base");
-  //window = new MyWindow(show);
+  MyWindow* window;
+  int appret = app->make_window_and_run<MyWindow>(argc,argv,show,window);
   PrintScene(LoadScene("Scenes/NVDATA.DAT"));
   window->SaveGUIScene();
   show->scenes[98] = Copy(window->getCurrentScene());
   SaveShow(show,"Temp");
   Debug("show->current->groups()->at(1)->gate(ERROR)");
-  return app->make_window_and_run<MyWindow>(argc,argv);
+  return appret;
 }
