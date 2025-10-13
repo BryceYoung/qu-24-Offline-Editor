@@ -114,16 +114,21 @@ void MyWindow::SaveGUIScene(){
 void MyWindow::nextSceneButton(){
   if(SceneFocused >= 99) return;
   GUIscenes[SceneFocused+1].activate();
+  if(debug) std::cout << "Load Next Scene:" << SceneFocused+1 << std::endl;
+  SceneFocused++;
 }
 
 void MyWindow::prevSceneButton(){
   if(SceneFocused <= 0) return;
   GUIscenes[SceneFocused-1].activate();
+  if(debug) std::cout << "Load Previous Scene:" << SceneFocused-1 << std::endl;
+  SceneFocused--;
 }
 
 void MyWindow::GoSceneButton(){
   std::cout << SceneFocused << std::endl;
   LoadGUIScene(Copy(GUIscenes[SceneFocused].getScene()));
+  if(debug) std::cout << "Load Scene:" << SceneFocused << std::endl;
 }
 
 void MyWindow::UpdateSceneButton(){
@@ -131,6 +136,7 @@ void MyWindow::UpdateSceneButton(){
   delete WindowShow->scenes[SceneFocused];
   WindowShow->scenes[SceneFocused] = current_scene;
   GUIscenes[SceneFocused].setScene(current_scene);
+  if(debug) std::cout << "Update Scene:" << SceneFocused << std::endl;
 }
 
 void MyWindow::MoveSceneUpButton(){
@@ -141,6 +147,8 @@ void MyWindow::MoveSceneUpButton(){
   WindowShow->scenes[SceneFocused-1] = temp;
   GUIscenes[SceneFocused-1].setScene(temp);
   GUIscenes[SceneFocused-1].activate();
+  if(debug) std::cout << "Swap Scenes: " << SceneFocused <<" <-> " << SceneFocused-1 << std::endl;
+  SceneFocused--;
 }
 
 void MyWindow::MoveSceneDownButton(){
@@ -151,6 +159,8 @@ void MyWindow::MoveSceneDownButton(){
   WindowShow->scenes[SceneFocused+1] = temp;
   GUIscenes[SceneFocused+1].setScene(temp);
   GUIscenes[SceneFocused+1].activate();
+  if(debug) std::cout << "Swap Scenes: " << SceneFocused <<" <-> " << SceneFocused+1 << std::endl;
+  SceneFocused++;
 }
 
 void MyWindow::DeselectFaders(int dontSelect){
