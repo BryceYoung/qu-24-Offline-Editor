@@ -17,6 +17,7 @@ Fader::Fader():
   set_size_request(50,50);
   attach(mute,2,2,1,1);
   set_row_homogeneous(true);
+  slider.set_orientation(Gtk::Orientation::VERTICAL);
   attach_next_to(select,mute,Gtk::PositionType::BOTTOM,1,1);
   attach_next_to(*widget,select,Gtk::PositionType::BOTTOM,2,1);
   attach_next_to(slider,*widget,Gtk::PositionType::BOTTOM,1,6);
