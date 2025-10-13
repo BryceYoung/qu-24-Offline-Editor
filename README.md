@@ -20,3 +20,7 @@ And the following features are planned, but with no current date:
 
 
 If you have any requested features please make an issue
+
+
+To Setup to then Build:
+- Copy libkaitai_struct_cpp_stl_runtime.so to /usr/local/lib
